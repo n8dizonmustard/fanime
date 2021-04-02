@@ -1,1 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
 <h1>Home</h1>
+<img src="./static/images/fanime.png" alt="">
+{% for i in response.data%}
+<p>{{i.attributes.canonicalTitle}}</p>
+<p><img src="{{i.attributes.posterImage.small}}" alt=""><p>
+<p>{{i.attributes.description}}</p>
+{%endfor%}
+
+
+
+
+
+ <p>{{response.links.first}}</p>
+ <p>{{response.links.previous}}</p>
+ <p>{{response.links.next}}</p>
+ <p>{{response.links.last}}</p>
+
+
+{% endblock %}
