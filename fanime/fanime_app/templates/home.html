@@ -5,7 +5,7 @@
 <h1>Home</h1>
 <img src="./static/images/fanime.png" alt="">
 {% for i in response.data%}
-<a href="{% url 'detail' %}">
+<a href="{% url 'detail' i.id %}">
 <p>{{i.attributes.canonicalTitle}}</p>
 <p><img src="{{i.attributes.posterImage.small}}" alt=""><p>
 </a>
