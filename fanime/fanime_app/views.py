@@ -12,19 +12,20 @@ def home(request):
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'home.html',{'response':response, 'page':page})
 
-def detail(request, i_id):
-  print(i_id)
+def detail(request, api_anime_id):
+  print(api_anime_id)
   comment_form = CommentForm()
-  response = requests.get(f'https://kitsu.io/api/edge/anime/{i_id}').json()
-  return render(request, 'detail.html', {'response': response, 'i_id':i_id, 'comment_form':comment_form})
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
 
-def add_comment(request, i_id):
+def add_comment(request, api_anime_id):
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
-    new_comment.anime_id = i_id
+    new_comment.anime_id = api_anime_id
     new_comment.save()
-  return redirect('detail', i_id=i_id)
+  return redirect('detail', api_anime_id=api_anime_id)
+
 def next(request, page):
   page = page + 5
   print(page)
