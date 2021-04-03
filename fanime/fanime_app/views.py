@@ -7,7 +7,6 @@ import requests
 
 def home(request):
   page = '0'
- 
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'home.html',{'response':response, 'page':page})
 def detail(request, i_id):
@@ -19,6 +18,22 @@ def next(request, page):
   print(page)
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'next.html', {'response':response, 'page': page})
+
+def previous(request, page):
+  page = page - 5
+  print(page)
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  return render(request, 'previous.html', {'response':response, 'page': page})
+
+def first(request):
+  page = '0'
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  return render(request, 'home.html',{'response':response, 'page':page})
+
+def last(request):
+  page = '16143'
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  return render(request, 'home.html',{'response':response, 'page':page})
 
 def profile(request):
     return render(request, 'profile.html')

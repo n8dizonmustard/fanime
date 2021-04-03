@@ -10,13 +10,25 @@
 <p><img src="{{i.attributes.posterImage.small}}" alt=""><p>
 </a>
 {%endfor%}
-
-
-
+{% if page != '16143' %}
 <form action="{% url 'next' page %}" >
-
     <button>Next Page</button>
 </form>
+<form action="{% url 'last' %}" >
+    <button>Last Page</button>
+</form>
+{% endif %}
+
+
+{%if page == '16143' %}
+<form action="{% url 'previous' page %}" >
+    <button>Previous Page</button>
+</form>
+<form action="{% url 'first' %}" >
+    <button>First Page</button>
+</form>
+{%endif%}
+
 
  <p>{{response.links.first}}</p>
  <p>{{response.links.previous}}</p>
