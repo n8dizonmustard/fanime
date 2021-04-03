@@ -4,6 +4,8 @@
 {% block content %}
 <h1>Home</h1>
 <img src="./static/images/fanime.png" alt="">
+
+<!-- showing animes from api -->
 {% for api_anime in response.data%}
 <a href="{% url 'detail' api_anime.id %}">
 <p>{{api_anime.attributes.canonicalTitle}}</p>
@@ -12,6 +14,7 @@
 {%endfor%}
 
 
+<!-- buttons to jump through pages -->
 <form action="{% url 'first' %}" >
     <button class="btn">First Page</button>
 </form><br>
