@@ -6,10 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Anime(models.Model):
-    name = models.CharField(max_length=100)
-    rating = models.IntegerField()
-    image = models.URLField()
-    description = models.TextField(max_length=400)
+    api_id = models.CharField(max_length=100)
 
 
 class Profile(models.Model):

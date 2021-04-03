@@ -2,10 +2,10 @@
 
 
 {% block content %}
-<h1>Anime Detail's Page</h1>
+<h1>{{response.data.attributes.canonicalTitle}}</h1>
 <img src="{{response.data.attributes.posterImage.medium}}" alt="">
 
-<p>Title: {{response.data.attributes.canonicalTitle}}</p>
+
 <p>Average Rating: {{response.data.attributes.averageRating}}</p>
 <p>Start Date: {{response.data.attributes.startDate}}</p>
 <p>End Date: {{response.data.attributes.endDate}}</p>
