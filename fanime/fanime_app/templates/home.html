@@ -12,28 +12,21 @@
 {%endfor%}
 {% if page != '16143' %}
 <form action="{% url 'next' page %}" >
-    <button>Next Page</button>
-</form>
+    <button class="btn">Next Page</button>
+</form><br>
 <form action="{% url 'last' %}" >
-    <button>Last Page</button>
+    <button class="btn">Last Page</button>
 </form>
 {% endif %}
 
 
 {%if page == '16143' %}
 <form action="{% url 'previous' page %}" >
-    <button>Previous Page</button>
-</form>
+    <button class="btn">Previous Page</button>
+</form><br>
 <form action="{% url 'first' %}" >
-    <button>First Page</button>
+    <button class="btn">First Page</button>
 </form>
 {%endif%}
-
-
- <p>{{response.links.first}}</p>
- <p>{{response.links.previous}}</p>
- <a href="">{{response.links.next}}</a>
- <p>{{response.links.last}}</p>
-
 
 {% endblock %}

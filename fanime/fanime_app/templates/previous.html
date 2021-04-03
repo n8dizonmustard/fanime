@@ -13,22 +13,15 @@
 
 
 <form action="{% url 'first' %}" >
-    <button>First Page</button>
-</form>
+    <button class="btn">First Page</button>
+</form><br>
 <form action="{% url 'previous' page %}" >
-    <button>Previous Page</button>
-</form>
+    <button class="btn">Previous Page</button>
+</form><br>
 <form action="{% url 'next' page %}" >
-    <button>Next Page</button>
-</form>
+    <button class="btn">Next Page</button>
+</form><br>
 <form action="{% url 'last' %}" >
-    <button>Last Page</button>
-</form>
-
- <p>{{response.links.first}}</p>
- <p>{{response.links.previous}}</p>
- <a href="">{{response.links.next}}</a>
- <p>{{response.links.last}}</p>
-
-
+    <button class="btn">Last Page</button>
+</form><br>
 {% endblock %}
