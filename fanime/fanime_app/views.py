@@ -24,6 +24,19 @@ def detail(request, api_anime_id):
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
 
 
+##runs when user clicks a category option
+def categories(request,category):
+  page = 0
+  response = requests.get(f'https://kitsu.io/api/edge/anime/?filter[categories]={category}').json() ##category will be diff depending on button
+  return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
+
+#when a user hits next on category page than add 10 to page make new request to api and render new view
+def categories_next(request,category, page):
+  page = page + 10
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=adventure&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
+
+
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h1>{{category}} Anime</h1>
+
+{% for api_anime in response.data%}
+<a href="{% url 'detail' api_anime.id %}">
+<p>{{api_anime.attributes.canonicalTitle}}</p>
+<p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
+</a>
+{%endfor%}
+
+<form action="{% url 'categories_next' 'category' page %}" >
+    <button class="btn">Next Page</button>
+</form><br>
+{% endblock %}

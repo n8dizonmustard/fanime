@@ -4,6 +4,17 @@
 {% block content %}
 <h1>Home</h1>
 <img src="./static/images/fanime.png" alt="">
+
+
+<!-- sending over the category the user picks to urls -->
+<h2>Search by genre</h2>
+<form action="{% url 'categories' 'adventure' %}">
+    <button type="submit" class="btn">ADVENTURE</button>
+</form>
+
+
+
+
 {% for api_anime in response.data%}
 <a href="{% url 'detail' api_anime.id %}">
 <p>{{api_anime.attributes.canonicalTitle}}</p>
@@ -29,4 +40,10 @@
 </form>
 {%endif%}
 
+
+<script>
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+
+</script>
 {% endblock %}
