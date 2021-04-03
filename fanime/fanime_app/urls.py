@@ -11,5 +11,6 @@ urlpatterns = [
     path('detail/<int:api_anime_id>', views.detail, name='detail'),
     path('detail/<int:api_anime_id>', views.add_comment, name ='add_comment'), 
     path('profile/', views.profile, name='profile'),
+    path('profile/create/', views.ProfileCreate.as_view(), name="profile_create"),
     path('accounts/signup/', views.signup, name='signup'),
 ]
