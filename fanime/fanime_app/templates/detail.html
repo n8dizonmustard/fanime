@@ -13,4 +13,15 @@
 <br>
 <p>Description: {{response.data.attributes.synopsis}}</p>
 
+
+
+{% for comment in anime.comment_set.all %}
+<p>comment.comment</p>
+{%endfor%}
+<form action="{% url 'add_comment' i_id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn" value="Add Comment">
+  </form>
+
 {% endblock %}
