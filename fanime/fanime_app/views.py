@@ -38,6 +38,9 @@ def categories_next(request,category, page):
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
 
 
+
+
+
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):

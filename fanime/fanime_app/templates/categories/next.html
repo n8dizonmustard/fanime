@@ -7,17 +7,25 @@
 
 <!-- Next set of animes is now being shown to user -->
 <h1>{{category}} Anime</h1>
-{% for api_anime in response.data%}
-<a href="{% url 'detail' api_anime.id %}">
-<p>{{api_anime.attributes.canonicalTitle}}</p>
-<p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
-</a>
+<div class="row">
+    {% for api_anime in response.data%} 
+    <div class="col s4">
+    <a href="{% url 'detail' api_anime.id %}">
+    <p>{{api_anime.attributes.canonicalTitle}}</p>
+    <p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
+    </a>
+    </div>
 {%endfor%}
+</div>
+
+
 
 <!-- this button will send the user to the next page. and repeat everytime. -->
+
+
+<div class="row">
 <form action="{% url 'categories_next' 'category' page %}" >
     <button class="btn">Next Page</button>
-</form><br>
+</form>
+</div>
 {% endblock %}
-
-<!-- still need to add previous/first/last button. they basically work the same way -->
