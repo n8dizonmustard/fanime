@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="{% url 'home' %}">HOME</a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
-                    <li><a href="{% url 'popular' %}">MOST POPULAR</a></li>
+                    <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="right">
@@ -33,7 +33,7 @@
                     <li><a href="{% url 'profile_create' %}">EDIT PROFILE</a></li>
                 </ul>
                 {% else %}
-                <ul>
+                <ul class="right">
                     <li><a href="{% url 'signup' %}">SIGNUP</a></li>
                     <li><a href="{% url 'login' %}">LOGIN</a></li>
                 </ul>
