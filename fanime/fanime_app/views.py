@@ -78,12 +78,12 @@ def previous(request, page):
 def first(request):
   page = '0' #if user hits first page page = 0 
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
-  return render(request, 'home.html',{'response':response, 'page':page})
+  return render(request, 'library.html',{'response':response, 'page':page})
 
 def last(request):
   page = '16143' # according to api docs 16543 is the last page number
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
-  return render(request, 'home.html',{'response':response, 'page':page})
+  return render(request, 'library.html',{'response':response, 'page':page})
 
 @login_required
 def profile(request):

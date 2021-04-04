@@ -117,25 +117,29 @@
 <hr><br><br>
 
 <!-- give user the ability to go to next page if not on last page -->
+<div class="row">
 {% if page != '16143' %}
-<form action="{% url 'next' page %}" >
-    <button class="btn">Next Page</button>
-</form><br>
-<form action="{% url 'last' %}" >
+<form class="right" action="{% url 'last' %}" >
     <button class="btn">Last Page</button>
 </form>
+<form class="right" style="margin-right:3%;" action="{% url 'next' page %}" >
+    <button class="btn">Next Page</button>
+</form>
 {% endif %}
+</div>
 
 
 <!-- give user the ability to go back if not on first page -->
+<div class="row">
 {%if page == '16143' %}
-<form action="{% url 'previous' page %}" >
-    <button class="btn">Previous Page</button>
-</form><br>
-<form action="{% url 'first' %}" >
+<form class="left" action="{% url 'first' %}" >
     <button class="btn">First Page</button>
 </form>
+<form class="left" style="margin-left:3%;"action="{% url 'previous' page %}" >
+    <button class="btn">Previous Page</button>
+</form>
 {%endif%}
+</div>
 
 <!-- Javascript from materialize. I ended up not needing it but im leaving here incase we need later  -->
 <script>
