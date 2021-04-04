@@ -56,6 +56,12 @@ def random(request):
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
   return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id})
 
+#Showing most popular animes according to kitsu
+#I think we should change our layout and put this on homepage?
+def popular(request):
+  response = requests.get(f'https://kitsu.io/api/edge/anime?fields%5Banime%5D=slug%2CcanonicalTitle%2Ctitles%2CposterImage%2Csynopsis%2CaverageRating%2CstartDate%2CpopularityRank%2CratingRank%2CyoutubeVideoId&filter%5Bcategories%5D=action&page%5Boffset%5D=0&page%5Blimit%5D=20&sort=-user_count').json()
+  return render(request, 'popular.html', {'response':response,})
+  
 def next(request, page):
   page = page + 5 # if a user hit the next button then whatever page is currently at +5 to get the new response
   print(page) # this will help you if you wanna see it in terminal. Helped me

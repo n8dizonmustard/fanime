@@ -24,12 +24,13 @@
                 <ul>
                     <li><a href="{% url 'home' %}">HOME</a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
+                    <li><a href="{% url 'popular' %}">MOST POPULAR</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="right">
                     <li><a href="{% url 'logout' %}">LOGOUT</a></li>
                     <li><a href="{% url 'profile' %}">PROFILE</a></li>
-                    <li><a href="{% url 'profile_create' %}">Edit Profile</a></li>
+                    <li><a href="{% url 'profile_create' %}">EDIT PROFILE</a></li>
                 </ul>
                 {% else %}
                 <ul>
