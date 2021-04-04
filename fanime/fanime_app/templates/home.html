@@ -2,8 +2,10 @@
 
 
 {% block content %}
-<h1>Home</h1>
-<img src="./static/images/fanime.png" alt="">
+<br>
+<div class="center">
+    <img  src="./static/images/fanime.png" alt="">
+</div>
 <hr>
 
 <!-- this does nothing right now but will be used to search anime by name -->
@@ -13,74 +15,90 @@
           <label for="input_text">Search For Anime</label>
       </div>
 <!-- sending over the category the user picks to urls -->
-<h2>Search by genre</h2>
+<h2 class="center">Search by genre</h2>
 <div class="row">
 
-    <div class="col s1">
+    <div class="col s1" style="margin-left: 5%; margin-right:7%;">
         <form action="{% url 'categories' 'adventure' %}">
             <button type="submit" class="btn">ADVENTURE</button>
         </form>
     </div>
     
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'magic' %}">
             <button type="submit" class="btn">MAGIC</button>
         </form>
     </div>
     
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'action' %}">
             <button type="submit" class="btn">ACTION</button>
         </form>
     </div>
 
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'horror' %}">
             <button type="submit" class="btn">HORROR</button>
         </form>
     </div>
 
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'mecha' %}">
             <button type="submit" class="btn">MECHA</button>
         </form>
     </div>
 
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'drama' %}">
             <button type="submit" class="btn">DRAMA</button>
         </form>
     </div>
 
-    <div class="col s1">
+    <div class="col s1" style="margin-right:4%;">
         <form action="{% url 'categories' 'comedy' %}">
             <button type="submit" class="btn">COMEDY</button>
         </form>
     </div>
 
-    <div class="col s1">
-        <form action="{% url 'categories' 'thriller' %}">
-            <button type="submit" class="btn">THRILLER</button>
-        </form>
-    </div>
-
-    <div class="col s1">
-        <form action="{% url 'categories' 'sports' %}">
-            <button type="submit" class="btn">SPORTS</button>
-        </form>
-    </div>
-    <div class="col s1">
-        <form action="{% url 'categories' 'kids' %}">
-            <button type="submit" class="btn">KIDS</button>
-        </form>
-    </div>
-
-    
-
-
-
+</div>
+<div class="row">
+<div class="col s1" style="margin-left:5%; margin-right:4%;">
+    <form action="{% url 'categories' 'thriller' %}">
+        <button type="submit" class="btn">THRILLER</button>
+    </form>
 </div>
 
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'sports' %}">
+        <button type="submit" class="btn">SPORTS</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:1%;">
+    <form action="{% url 'categories' 'kids' %}">
+        <button type="submit" class="btn">KIDS</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'romance' %}">
+        <button type="submit" class="btn">ROMANCE</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'violence' %}">
+        <button type="submit" class="btn">VIOLENCE</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:9%;">
+    <form action="{% url 'categories' 'psychological' %}">
+        <button type="submit" class="btn">PSYCHOLOGICAL</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'mystery' %}">
+        <button type="submit" class="btn">MYSTERY</button>
+    </form>
+</div>
+</div>
 <hr>
 
 
