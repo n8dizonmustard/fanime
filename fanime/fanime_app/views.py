@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Anime, Comment, Profile
 from .forms import CommentForm
 import requests
+import random as r
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -47,6 +48,13 @@ def add_comment(request, api_anime_id):
     new_comment.save()
   return redirect('detail', api_anime_id=api_anime_id)
 
+
+#this is cool. random animes when you dont know what to watch
+#should we make this login users only?
+def random(request):
+  api_anime_id = r.randint(0,4292)
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id})
 
 def next(request, page):
   page = page + 5 # if a user hit the next button then whatever page is currently at +5 to get the new response

@@ -13,13 +13,74 @@
           <label for="input_text">Search For Anime</label>
       </div>
 <!-- sending over the category the user picks to urls -->
-<!-- I only had time to add one but it should work the same way for each category -->
-<div>
-    <h2>Search by genre</h2>
-    <form action="{% url 'categories' 'adventure' %}">
-        <button type="submit" class="btn">ADVENTURE</button>
-    </form>
+<h2>Search by genre</h2>
+<div class="row">
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'adventure' %}">
+            <button type="submit" class="btn">ADVENTURE</button>
+        </form>
+    </div>
+    
+    <div class="col s1">
+        <form action="{% url 'categories' 'magic' %}">
+            <button type="submit" class="btn">MAGIC</button>
+        </form>
+    </div>
+    
+    <div class="col s1">
+        <form action="{% url 'categories' 'action' %}">
+            <button type="submit" class="btn">ACTION</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'horror' %}">
+            <button type="submit" class="btn">HORROR</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'mecha' %}">
+            <button type="submit" class="btn">MECHA</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'drama' %}">
+            <button type="submit" class="btn">DRAMA</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'comedy' %}">
+            <button type="submit" class="btn">COMEDY</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'thriller' %}">
+            <button type="submit" class="btn">THRILLER</button>
+        </form>
+    </div>
+
+    <div class="col s1">
+        <form action="{% url 'categories' 'sports' %}">
+            <button type="submit" class="btn">SPORTS</button>
+        </form>
+    </div>
+    <div class="col s1">
+        <form action="{% url 'categories' 'kids' %}">
+            <button type="submit" class="btn">KIDS</button>
+        </form>
+    </div>
+
+    
+
+
+
 </div>
+
 <hr>
 
 
