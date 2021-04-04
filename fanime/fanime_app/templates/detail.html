@@ -2,15 +2,31 @@
 
 
 {% block content %}
-<h1>Anime Detail's Page</h1>
+<h1>{{response.data.attributes.canonicalTitle}}</h1>
 <img src="{{response.data.attributes.posterImage.medium}}" alt="">
 
-<p>Title: {{response.data.attributes.canonicalTitle}}</p>
+
 <p>Average Rating: {{response.data.attributes.averageRating}}</p>
 <p>Start Date: {{response.data.attributes.startDate}}</p>
 <p>End Date: {{response.data.attributes.endDate}}</p>
 
 <br>
 <p>Description: {{response.data.attributes.synopsis}}</p>
+
+
+{{api_anime_id}}
+{% for comment in anime.comment_set.all %}
+<p>comment.comment</p>
+{%endfor%}
+
+
+<!-- If user is logged in a comment form is shown -->
+{% if user.is_authenticated %} user
+<form action="{% url 'add_comment' api_anime_id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn" value="Add Comment">
+  </form>
+{% endif %}
 
 {% endblock %}

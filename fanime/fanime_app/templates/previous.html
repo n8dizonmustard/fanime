@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Home</h1>
+<img src="./static/images/fanime.png" alt="">
+
+
+<!-- showing animes from api -->
+{% for i in response.data%}
+<a href="{% url 'detail' i.id %}">
+<p>{{i.attributes.canonicalTitle}}</p>
+<p><img src="{{i.attributes.posterImage.small}}" alt=""><p>
+</a>
+{%endfor%}
+
+
+
+<!-- buttons to jump through pages -->
+<form action="{% url 'first' %}" >
+    <button class="btn">First Page</button>
+</form><br>
+<form action="{% url 'previous' page %}" >
+    <button class="btn">Previous Page</button>
+</form><br>
+<form action="{% url 'next' page %}" >
+    <button class="btn">Next Page</button>
+</form><br>
+<form action="{% url 'last' %}" >
+    <button class="btn">Last Page</button>
+</form><br>
+{% endblock %}
