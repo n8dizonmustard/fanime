@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Anime, Comment, Profile
+from .models import Anime, Comment, Profile, Photo
 from .forms import CommentForm
 import requests
 import random as r
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import uuid
+import boto3   
 
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'pincollector'
 # Create your views here.
 
 def home(request):
@@ -87,6 +91,28 @@ def last(request):
   page = '16143' # according to api docs 16543 is the last page number
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'library.html',{'response':response, 'page':page})
+
+
+
+@login_required
+def add_photo(request, profile_id):
+    # photo-file will be the "name" attribute on the <input type="file">
+    profile = Profile.objects.filter(user=request.user)
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            Photo.objects.create(url=url, profile_id=profile_id)
+        except:
+            print('An error occurred uploading file to S3')
+    return render(request, 'profile.html', {'profile_id':profile_id, 'profile':profile})
 
 @login_required
 def profile(request):
