@@ -54,10 +54,7 @@ def categories_first(request,category):
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
 
-def search(request, name):
-  print(name)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter[text]={name}').json() #making new request to api with anime id
-  return render(request, 'search.html', {'response': response, 'name':name})
+
 
 #still not working sorry
 @login_required
