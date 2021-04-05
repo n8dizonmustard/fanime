@@ -24,7 +24,7 @@
 
 
 <div class="row">
-
+{%if page != 0%}
 <form style="margin-right:3%" class="left" action="{% url 'categories_first' category %}" >
 
     <button class="btn red darken-2">First Page</button>
@@ -34,6 +34,7 @@
 
     <button class="btn red darken-2">Previous Page</button>
 </form>
+{%endif%}
 
 <form class="right" action="{% url 'categories_next' category page %}" >
 

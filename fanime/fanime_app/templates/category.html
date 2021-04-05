@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<h1>{{category}} Anime</h1>
+<h1>{{category.capitalize}} Anime</h1>
 
 <!-- showing animes from api -->
 
@@ -22,7 +22,7 @@
 
 
 <!-- button to go to next page in category -->
-<form action="{% url 'categories_next' 'category' page %}" >
+<form class="right" action="{% url 'categories_next' category page %}" >
     <button class="btn">Next Page</button>
 </form><br>
 {% endblock %}
