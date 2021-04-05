@@ -13,3 +13,7 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+  #library-h1{
+    font-family: 'Alfa Slab One', cursive;
+  }
