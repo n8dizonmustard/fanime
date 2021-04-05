@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="center">
-    <h1>ALL ANIMES</h1>
+    <h1><strong>ALL ANIMES</strong></h1>
 </div>
 <!-- this does nothing right now but will be used to search anime by name -->
 <form class="col s12">
@@ -14,7 +14,10 @@
     </div>
     <!-- sending over the category the user picks to urls -->
     <div class="card">
-        <h2 class="center">Search by Genre</h2>
+        <blockquote>
+            <h2 class=" black center"><span class="red-text">Search by Genre</span></h2>
+        </blockquote>
+
     </div>
 
 
@@ -135,10 +138,10 @@
     <!-- give user the ability to go back if not on first page -->
     {%if page == '16143' %}
     <form action="{% url 'previous' page %}">
-        <button class="btn black">Previous Page</button>
+        <button class="btn red">Previous Page</button>
     </form><br>
     <form action="{% url 'first' %}">
-        <button class="btn black">First Page</button>
+        <button class="btn red">First Page</button>
     </form>
     {%endif%}
 
