@@ -2,25 +2,21 @@
 
 
 {% block content %}
-
 <body class="constainer black">
+<h1>{{response.data.attributes.canonicalTitle}}</h1>
+<img src="{{response.data.attributes.posterImage.medium}}" alt="">
+<div class="row">
 
-
-  <h1>{{response.data.attributes.canonicalTitle}}</h1>
-  <img src="{{response.data.attributes.posterImage.medium}}" alt="">
-  <div class="row black">
-
-    <div class="col s2" style="">
-      <form action="">
-        <button type="submit" class="btn red darken-2"><span class="">ADD TO FAVORITES</span></button>
-      </form>
-    </div>
-    <div class="col s2" style="">
-      <form action="">
+  <div class="col s2" style="">
+    <form action="{% url 'add_favorite' api_anime_id response.data.attributes.canonicalTitle %}">
+        <button type="submit" class="btn red darken-2">ADD TO FAVORITES</button>
+    </form>
+  </div>
+  <div class="col s2" style="">
+    <form action="">
         <button type="submit" class="btn red darken-2">ADD TO WATCHLIST</button>
       </form>
     </div>
-
   </div>
 
   <div class="container left white">
