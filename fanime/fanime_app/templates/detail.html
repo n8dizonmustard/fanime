@@ -4,6 +4,21 @@
 {% block content %}
 <h1>{{response.data.attributes.canonicalTitle}}</h1>
 <img src="{{response.data.attributes.posterImage.medium}}" alt="">
+<div class="row">
+
+  <div class="col s2" style="">
+    <form action="">
+        <button type="submit" class="btn red darken-2">ADD TO FAVORITES</button>
+    </form>
+  </div>
+  <div class="col s2" style="">
+    <form action="">
+        <button type="submit" class="btn red darken-2">ADD TO WATCHLIST</button>
+    </form>
+  </div>
+
+</div>
+
 
 
 <p>Average Rating: {{response.data.attributes.averageRating}}</p>
