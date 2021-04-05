@@ -3,26 +3,27 @@
 
 {% block content %}
 
+<blockquote class="red darken-2">
+    <h1>{{category.capitalize}} Anime</h1>
+</blockquote>
 
-<h1>{{category.capitalize}} Anime</h1>
 
 <!-- showing animes from api -->
-
-
-<div class="row">
-    {% for api_anime in response.data%} 
+<div class="row black">
+    {% for api_anime in response.data%}
     <div class="col s4">
-    <a href="{% url 'detail' api_anime.id %}">
-    <p>{{api_anime.attributes.canonicalTitle}}</p>
-    <p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
-    </a>
+        <a href="{% url 'detail' api_anime.id %}">
+            <p>{{api_anime.attributes.canonicalTitle}}</p>
+            <p><img src="{{api_anime.attributes.posterImage.small}}" alt="">
+                <p>
+        </a>
     </div>
-{%endfor%}
+    {%endfor%}
 </div>
 
 
 <!-- button to go to next page in category -->
-<form class="right" action="{% url 'categories_next' category page %}" >
-    <button class="btn">Next Page</button>
+<form action="{% url 'categories_next' 'category' page %}">
+    <button class="right btn red darken-2">Next Page</button>
 </form><br>
 {% endblock %}
