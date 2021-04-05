@@ -101,7 +101,10 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-   
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['name', 'favorite_anime_ever', 'about']
 
 def signup(request):
   error_message = ''
