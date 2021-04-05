@@ -7,10 +7,11 @@
     <h1 id="library-h1" class="red darken-2"><strong>ALL ANIMES</strong></h1>
 </div>
 <!-- this does nothing right now but will be used to search anime by name -->
-<form class="col s12">
+<form action=""class="col s12" method="get">
     <div class="input-field col s6">
         <input id="input_text" type="text">
         <label for="input_text">Search For Anime</label>
+        <button type="submit" class="btn red darken-2">SEARCH</button>
     </div>
     </form>
     <!-- sending over the category the user picks to urls -->
@@ -118,7 +119,7 @@
     <!-- showing first list of animes sent to us by api -->
     <div class="row black">
         {% for api_anime in response.data%}
-        <div class="col s3">
+        <div class="col s4">
             <a href="{% url 'detail' api_anime.id %}">
                 <p>{{api_anime.attributes.canonicalTitle}}</p>
                 <p><img src="{{api_anime.attributes.posterImage.small}}" alt="">
