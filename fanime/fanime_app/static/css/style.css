@@ -13,9 +13,15 @@ body {
     padding-top: 0;
     text-align: right;
   }
+  h1{
+    font-family: 'Alfa Slab One', cursive;
+
+  }
 
   #library-h1{
     font-family: 'Alfa Slab One', cursive;
+    box-shadow: 5px;
+    border-radius: 2px;
   }
 
   #genre-search{

@@ -11,8 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import boto3   
 
-S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
-BUCKET = 'pincollector'
+S3_BASE_URL = 'https://s3.us-west-2.amazonaws.com/'
+BUCKET = 'simanutui'
 # Create your views here.
 
 def home(request):
