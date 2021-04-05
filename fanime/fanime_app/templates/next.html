@@ -2,29 +2,131 @@
 
 
 {% block content %}
-<h1>Home</h1>
-<img src="./static/images/fanime.png" alt="">
+<div class="center">
+<h1>ALL ANIME</h1>
+</div>
+
+<!-- this does nothing right now but will be used to search anime by name -->
+    <form class="col s12">
+        <div class="input-field col s6">
+          <input id="input_text" type="text">
+          <label for="input_text">Search For Anime</label>
+      </div>
+<!-- sending over the category the user picks to urls -->
+<h2 class="center">Search by genre</h2>
+<div class="row">
+
+    <div class="col s1" style="margin-left: 5%; margin-right:7%;">
+        <form action="{% url 'categories' 'adventure' %}">
+            <button type="submit" class="btn">ADVENTURE</button>
+        </form>
+    </div>
+    
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'magic' %}">
+            <button type="submit" class="btn">MAGIC</button>
+        </form>
+    </div>
+    
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'action' %}">
+            <button type="submit" class="btn">ACTION</button>
+        </form>
+    </div>
+
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'horror' %}">
+            <button type="submit" class="btn">HORROR</button>
+        </form>
+    </div>
+
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'mecha' %}">
+            <button type="submit" class="btn">MECHA</button>
+        </form>
+    </div>
+
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'drama' %}">
+            <button type="submit" class="btn">DRAMA</button>
+        </form>
+    </div>
+
+    <div class="col s1" style="margin-right:4%;">
+        <form action="{% url 'categories' 'comedy' %}">
+            <button type="submit" class="btn">COMEDY</button>
+        </form>
+    </div>
+
+</div>
+<div class="row">
+<div class="col s1" style="margin-left:5%; margin-right:4%;">
+    <form action="{% url 'categories' 'thriller' %}">
+        <button type="submit" class="btn">THRILLER</button>
+    </form>
+</div>
+
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'sports' %}">
+        <button type="submit" class="btn">SPORTS</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:1%;">
+    <form action="{% url 'categories' 'kids' %}">
+        <button type="submit" class="btn">KIDS</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'romance' %}">
+        <button type="submit" class="btn">ROMANCE</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'violence' %}">
+        <button type="submit" class="btn">VIOLENCE</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:9%;">
+    <form action="{% url 'categories' 'psychological' %}">
+        <button type="submit" class="btn">PSYCHOLOGICAL</button>
+    </form>
+</div>
+<div class="col s1" style="margin-right:4%;">
+    <form action="{% url 'categories' 'mystery' %}">
+        <button type="submit" class="btn">MYSTERY</button>
+    </form>
+</div>
+</div>
+<hr>
 
 <!-- showing animes from api -->
+<div class="row">
 {% for api_anime in response.data%}
+<div class="col s3">
 <a href="{% url 'detail' api_anime.id %}">
 <p>{{api_anime.attributes.canonicalTitle}}</p>
 <p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
 </a>
+</div>
 {%endfor%}
+</div>
 
 
 <!-- buttons to jump through pages -->
-<form action="{% url 'first' %}" >
+<div class="row">
+<form class="left" action="{% url 'first' %}" >
     <button class="btn">First Page</button>
-</form><br>
-<form action="{% url 'previous' page %}" >
-    <button class="btn">Previous Page</button>
-</form><br>
-<form action="{% url 'next' page %}" >
-    <button class="btn red">Next Page</button>
-</form><br>
-<form action="{% url 'last' %}" >
-    <button class="btn red">Last Page</button>
 </form>
+<form class="left" style="margin-left:3%;"action="{% url 'previous' page %}" >
+    <button class="btn">Previous Page</button>
+</form>
+
+<form class="right" style="margin-left:3%;" action="{% url 'last' %}" >
+    <button class="btn">Last Page</button>
+
+</form>
+<form class="right" action="{% url 'next' page %}" >
+    <button class="btn">Next Page</button>
+</form>
+</div>
 {% endblock %}

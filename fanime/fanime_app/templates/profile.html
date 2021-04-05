@@ -6,12 +6,15 @@
 
 {% if profile%}
 {%for profile in profile%}
+{{profile.id}}
 <h1> {{profile.name}}'s Profile </h1>
 <p> {{profile.name}}'s favorite anime is <b>{{profile.favorite_anime_ever}}</b></p>
 <p> About: {{profile.about}}</p>
+
+<a href="{% url 'profile_update' profile.id %}">Edit</a>
 {%endfor%}
 {% else %}
 <h1>This is your profile page</h1>
-<h2>Please click edit profile to get started</h2>
+<h2>Please <a href="{% url 'profile_create' %}">create profile</a> to get started</h2>
 {%endif%}
 {% endblock %}

@@ -38,6 +38,9 @@ def categories_next(request,category, page):
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
 
 
+
+
+
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):
@@ -78,12 +81,12 @@ def previous(request, page):
 def first(request):
   page = '0' #if user hits first page page = 0 
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
-  return render(request, 'home.html',{'response':response, 'page':page})
+  return render(request, 'library.html',{'response':response, 'page':page})
 
 def last(request):
   page = '16143' # according to api docs 16543 is the last page number
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
-  return render(request, 'home.html',{'response':response, 'page':page})
+  return render(request, 'library.html',{'response':response, 'page':page})
 
 @login_required
 def profile(request):
@@ -98,7 +101,10 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-   
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['name', 'favorite_anime_ever', 'about']
 
 def signup(request):
   error_message = ''
