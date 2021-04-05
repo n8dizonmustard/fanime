@@ -19,28 +19,42 @@
         <nav>
             <div class="nav-wrapper black">
                 <ul>
-                    <li><a href="/" class="center brand-logo red-text"><img src="/static/images/fanime-text.png" alt=""
+                    <li><a href="/" class="center brand-logo "><img src="/static/images/fanime-text.png" alt=""
                                 width="250px" height="90%" style="margin-top:3%"></a>
                     </li>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 </ul>
-                <ul>
+                <ul class="hide-on-med-and-down">
                     <li class="active"><a href="{% url 'home' %}">HOME</a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
                     <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                <ul class="right">
+                <ul class="right hide-on-med-and-down">
                     <li><a href="{% url 'logout' %}">LOGOUT</a></li>
                     <li><a href="{% url 'profile' %}">PROFILE</a></li>
                 </ul>
                 {% else %}
-                <ul class="right">
+                <ul class="right hide-on-med-and-down">
                     <li><a href="{% url 'signup' %}">SIGNUP</a></li>
                     <li><a href="{% url 'login' %}">LOGIN</a></li>
                 </ul>
                 {% endif %}
             </div>
         </nav>
+        
+          <ul class="sidenav" id="mobile-demo">
+            <li class="active"><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
+            <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            {% else %}
+            <li><a href="{% url 'signup' %}">SIGNUP</a></li>
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            {%endif%}
+          </ul>
     </header>
 
     <main class="container">
@@ -50,4 +64,8 @@
 
 </body>
 
+<script>
+    var elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems);
+</script>
 </html>

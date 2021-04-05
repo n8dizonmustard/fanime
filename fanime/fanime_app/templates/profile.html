@@ -11,7 +11,7 @@
 
 
     {% for photo in profile.photo_set.all %}
-    <img src="{{photo.url}}">
+    <img class="responsive-img" src="{{photo.url}}">
     {% empty %}
     <div class="card-panel red-text center-align">No Profile Picture</div>
     <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">

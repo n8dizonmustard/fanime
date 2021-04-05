@@ -32,3 +32,8 @@ body {
     font-family: 'Alfa Slab One', cursive;
 
   }
+
+#logo{
+  margin-left: 5%;
+  margin-right: 5%;
+}
