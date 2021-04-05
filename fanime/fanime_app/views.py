@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Anime, Comment, Profile, Photo
+from .models import FavAnime, Comment, Profile, Photo
 from .forms import CommentForm
 import requests
 import random as r
@@ -38,12 +38,26 @@ def categories(request,category):
 #when a user hits next on category page than add 10 to page make new request to api and render new view
 def categories_next(request,category, page):
   page = page + 10
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=adventure&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  print(category)
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
 
+def categories_previous(request,category, page):
+  page = page - 10
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=adventure&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  return render(request, 'categories/previous.html', {'response':response, 'category':category,'page':page})
+
+def categories_first(request,category):
+  page = 0
+  print(category)
+  response = requests.get(f'https://kitsu.io/api/edge/anime/?filter[categories]={category}').json() ##category will be diff depending on button
+  return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
 
-
+def search(request, name):
+  print(name)
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter[text]={name}').json() #making new request to api with anime id
+  return render(request, 'search.html', {'response': response, 'name':name})
 
 #still not working sorry
 @login_required
@@ -60,8 +74,9 @@ def add_comment(request, api_anime_id):
 #should we make this login users only?
 def random(request):
   api_anime_id = r.randint(0,4292)
+  comment_form = CommentForm() 
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
-  return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id})
+  return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id, 'comment_form':comment_form})
 
 #Showing most popular animes according to kitsu
 #I think we should change our layout and put this on homepage?
@@ -150,3 +165,14 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def add_favorite(request, api_anime_id, api_anime_name):
+  profile = Profile.objects.filter(user=request.user)
+  profile.fav_anime_id = api_anime_id
+  profile.fav_anime_name = api_anime_name
+  print(profile.fav_anime_name)
+  comment_form = CommentForm() 
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
+
+
