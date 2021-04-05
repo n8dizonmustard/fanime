@@ -4,24 +4,27 @@
 {% block content %}
 <br>
 <div class="center">
-    <img  src="./static/images/fanime.png" alt="">
+    <img src="./static/images/fanime.png" alt="">
 </div>
 <hr>
 
 <!-- showing list of most popular animes sent to us by api -->
-<div class="center">
-    <h1> TOP ANIME </h1>
+<div class="card red center">
+    <blockquote>
+        <h1> TOP ANIME </h1>
+    </blockquote>
 </div>
 
-<div class="row">
-    {% for api_anime in response.data%} 
+<div class="row black">
+    {% for api_anime in response.data%}
     <div class="col s4">
-    <a href="{% url 'detail' api_anime.id %}">
-    <p>{{api_anime.attributes.canonicalTitle}}</p>
-    <p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
-    </a>
+        <a href="{% url 'detail' api_anime.id %}">
+            <p>{{api_anime.attributes.canonicalTitle}}</p>
+            <p><img src="{{api_anime.attributes.posterImage.small}}" alt="">
+                <p>
+        </a>
     </div>
-{%endfor%}
+    {%endfor%}
 </div>
 <hr><br><br>
 
