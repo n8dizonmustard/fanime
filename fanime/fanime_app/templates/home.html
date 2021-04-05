@@ -2,23 +2,27 @@
 
 
 {% block content %}
-<h1>Home</h1>
-<img src="./static/images/fanime.png" alt="">
-{% for i in response.data%}
-<a href="{% url 'detail' i.id %}">
-<p>{{i.attributes.canonicalTitle}}</p>
-<p><img src="{{i.attributes.posterImage.small}}" alt=""><p>
-</a>
+<br>
+<div class="center">
+    <img  src="./static/images/fanime.png" alt="">
+</div>
+<hr>
+
+<!-- showing list of most popular animes sent to us by api -->
+<div class="center">
+    <h1> TOP ANIME </h1>
+</div>
+
+<div class="row">
+    {% for api_anime in response.data%} 
+    <div class="col s4">
+    <a href="{% url 'detail' api_anime.id %}">
+    <p>{{api_anime.attributes.canonicalTitle}}</p>
+    <p><img src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
+    </a>
+    </div>
 {%endfor%}
-
-
-
-
-
- <p>{{response.links.first}}</p>
- <p>{{response.links.previous}}</p>
- <p>{{response.links.next}}</p>
- <p>{{response.links.last}}</p>
-
+</div>
+<hr><br><br>
 
 {% endblock %}
