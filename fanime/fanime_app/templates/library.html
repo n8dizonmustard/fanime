@@ -122,8 +122,7 @@
         <div class="col s4">
             <a href="{% url 'detail' api_anime.id %}">
                 <p>{{api_anime.attributes.canonicalTitle}}</p>
-                <p><img src="{{api_anime.attributes.posterImage.small}}" alt="">
-                    <p>
+                <p><img class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt="">
             </a>
         </div>
         {%endfor%}

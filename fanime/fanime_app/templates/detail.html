@@ -2,13 +2,13 @@
 
 
 {% block content %}
-<body class="constainer black">
+<body>
 <h1>{{response.data.attributes.canonicalTitle}}</h1>
-<img src="{{response.data.attributes.posterImage.medium}}" alt="">
+<img class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
 <div class="row">
 
   <div class="col s2" style="">
-    <form action="{% url 'add_favorite' api_anime_id response.data.attributes.canonicalTitle %}" method="post">
+    <form action="" method="post">
       {% csrf_token %}
       <button type="submit" class="btn red darken-2">ADD TO FAVORITES</button>
     </form>
@@ -21,7 +21,7 @@
   </div>
 </div>
 
-  <div class="container left white">
+  <div>
 
 
 
@@ -30,19 +30,17 @@
     <p>End Date: {{response.data.attributes.endDate}}</p>
   </div>
 
-  <div class="container left white">
+  <div>
     <br>
     <p>Description: {{response.data.attributes.synopsis}}</p>
-
-  </div>
+  </div><br><br>
 
 
   {{api_anime_id}}
   {% for comment in anime.comment_set.all %}
-  <p>comment.comment</p>
   {%endfor%}
   <!-- If user is logged in a comment form is shown -->
-  {% if user.is_authenticated %} user
+  {% if user.is_authenticated %} 
   <form action="{% url 'add_comment' api_anime_id %}" method="post">
     {% csrf_token %}
     {{ comment_form.as_p }}
