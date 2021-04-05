@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +24,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li class="active"><a href="{% url 'home' %}">HOME</a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
                     <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
                 </ul>
