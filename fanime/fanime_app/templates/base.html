@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header class="navbar-fixed">
-        <nav>
+    <header >
+        <nav class="navbar-fixed">
             <div class="nav-wrapper black">
                 <ul>
                     <li><a href="/" class="center brand-logo "><img src="/static/images/fanime-text.png" alt=""
                                 width="250px" height="90%" style="margin-top:3%"></a>
                     </li>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 </ul>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
                     <li class="active"><a href="{% url 'home' %}">HOME</a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
@@ -42,8 +43,7 @@
                 {% endif %}
             </div>
         </nav>
-        
-          <ul class="sidenav" id="mobile-demo">
+        <ul class="sidenav" id="mobile-demo">
             <li class="active"><a href="{% url 'home' %}">HOME</a></li>
             <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
             <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
@@ -57,15 +57,12 @@
           </ul>
     </header>
 
+
     <main class="container">
         {%block content %}
         {%endblock%}
     </main>
 
-</body>
 
-<script>
-    var elems = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(elems);
-</script>
+</body>
 </html>
