@@ -6,7 +6,10 @@
 
 {% if profile%}
 {%for profile in profile%}
-<h1> {{profile.name}}'s Profile </h1>
+<div class="center">
+    <h1> {{profile.name}}'s Profile </h1>
+
+
 {% for photo in profile.photo_set.all %}
 <img src="{{photo.url}}">
 {% empty %}
@@ -21,8 +24,12 @@
 
 <p> {{profile.name}}'s favorite anime is <b>{{profile.favorite_anime_ever}}</b></p>
 <p> About: {{profile.about}}</p>
-<a href="{% url 'profile_update' profile.id %}">Edit Profile</a>
+
+<form action="{% url 'profile_update' profile.id %}">
+    <button type="submit" class="btn">Edit Profile</button>
+</form>
 {%endfor%}
+</div>
 
 
 
