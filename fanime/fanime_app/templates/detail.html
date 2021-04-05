@@ -40,7 +40,7 @@
 <form action="{% url 'add_comment' api_anime_id %}" method="post">
     {% csrf_token %}
     {{ comment_form.as_p }}
-    <input type="submit" class="btn" value="Add Comment">
+    <input type="submit" class="btn red darken-2" value="Add Comment">
   </form>
 {% endif %}
 

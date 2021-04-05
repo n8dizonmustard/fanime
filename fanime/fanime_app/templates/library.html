@@ -65,6 +65,7 @@
         <div class="col s1" style="margin-left:5%; margin-right:4%;">
             <form action="{% url 'categories' 'thriller' %}">
                 <button type="submit" class="btn">THRILLER</button>
+
             </form>
         </div>
 
@@ -131,6 +132,29 @@
         {% endif %}
     </div>
 
+    <!-- showing first list of animes sent to us by api -->
+    <div class="row">
+        {% for api_anime in response.data%}
+        <div class="col s3">
+            <a href="{% url 'detail' api_anime.id %}">
+                <p>{{api_anime.attributes.canonicalTitle}}</p>
+                <p><img src="{{api_anime.attributes.posterImage.small}}" alt="">
+                    <p>
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+    <hr><br><br>
+
+    <!-- give user the ability to go to next page if not on last page -->
+    {% if page != '16143' %}
+    <form action="{% url 'next' page %}">
+        <button class="btn">Next Page</button>
+    </form><br>
+    <form action="{% url 'last' %}">
+        <button class="btn">Last Page</button>
+    </form>
+    {% endif %}
 
     <!-- give user the ability to go back if not on first page -->
     <div class="row">
@@ -143,7 +167,15 @@
         </form>
         {%endif%}
     </div>
-
+    <!-- give user the ability to go back if not on first page -->
+    {%if page == '16143' %}
+    <form action="{% url 'previous' page %}">
+        <button class="btn black">Previous Page</button>
+    </form><br>
+    <form action="{% url 'first' %}">
+        <button class="btn black">First Page</button>
+    </form>
+    {%endif%}
     <!-- Javascript from materialize. I ended up not needing it but im leaving here incase we need later  -->
     <script>
         var elems = document.querySelectorAll('select');
