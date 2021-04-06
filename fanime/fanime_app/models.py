@@ -13,12 +13,16 @@ class FavList(models.Model):
     api_id = models.CharField(max_length=10)
     api_name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.api_name
+
 
 class Profile(models.Model):
     name = models.CharField(max_length=100)
     favorite_anime_ever = models.CharField(max_length=100)
     about = models.TextField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    fav_list = models.ManyToManyField(FavList)
     def __str__(self):
         return self.name
 
