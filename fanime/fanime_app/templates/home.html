@@ -17,12 +17,17 @@
 
 <div class="row center">
     {% for api_anime in response.data%}
-    <div class="col s4">
-        <a href="{% url 'detail' api_anime.id %}">
-            <p>{{api_anime.attributes.canonicalTitle}}</p>
-            <p><img class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+    <div  class="col s4">
+        <a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+            <p style="color:white;">{{api_anime.attributes.canonicalTitle}}</p>
+            <p><img  class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
         </a>
     </div>
+
+
+
+
+
     {%endfor%}
 </div>
 <hr><br><br>

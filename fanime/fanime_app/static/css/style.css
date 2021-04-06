@@ -18,6 +18,8 @@ body {
 
   }
 
+  
+
   .cat{
     color: black;
   }
@@ -41,6 +43,19 @@ body {
     font-family: 'Alfa Slab One', cursive;
 
   }
+  #mobile-pix{
+    display:none;
+  }
+  @media only screen and (max-width: 1315px) {
+    #ani-pix{
+     display:none;
+    }
+    #mobile-pix{
+      display:contents;
+      
+    }
+  }
+
   @media only screen and (max-width: 991px) {
 
     #cat-btn{
