@@ -28,7 +28,8 @@ def detail(request, api_anime_id):
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
 
-
+def forum(request):
+  return render(request, 'forum.html')
 ##runs when user clicks a category option
 def categories(request,category):
   page = 0
@@ -57,10 +58,8 @@ def categories_first(request,category):
 def search(request):
   page = 0
   body = request.POST.get('handle',None)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
-  
-  return render(request, 'search.html', {'response': response})
-
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=18&page%5Boffset%5D={page}').json()
+  return render(request, 'search.html', {'response': response, 'body':body, 'page':page})
 
 #still not working sorry
 @login_required

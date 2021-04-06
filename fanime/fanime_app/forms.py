@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Comment
+from .models import *
 
 
 #making form from comment model only input is the comment
