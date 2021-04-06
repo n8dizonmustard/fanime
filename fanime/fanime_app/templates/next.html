@@ -4,9 +4,17 @@
 {% block content %}
 
 
-    <div id="cat-btn" class="center">
-        <h2>Categories</h2>
-        </div>
+    <br>
+    <div class="center">
+        <img class="responsive-img" src="../static/images/fanime.png" alt="">
+    </div>
+    <hr>
+    
+    <div class="card red center">
+        <blockquote>
+            <h1> CATEGORIES </h1>
+        </blockquote>
+    </div>
     <div class="row">
         <div class="col s4">
             <hr>
@@ -37,13 +45,25 @@
 <div class="row center">
 {% for api_anime in response.data%}
 <div class="col s4">
-<a href="{% url 'detail' api_anime.id %}">
-<p>{{api_anime.attributes.canonicalTitle}}</p>
-<p><img class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
+<a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+<p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+            <div class="effect">
+            <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+            </div>
 </a>
 </div>
 {%endfor%}
 </div>
+<div class="row center">
+        {% for api_anime in response.data%}
+    <div>
+        <a id="mobile-pix" href="{% url 'detail' api_anime.id %}">
+            <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+            <p><img  class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+        </a>
+    </div>
+    {%endfor%}
+    </div>
 
 
 <!-- buttons to jump through pages -->

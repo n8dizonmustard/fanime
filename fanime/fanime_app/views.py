@@ -38,6 +38,7 @@ def categories(request,category):
 #when a user hits next on category page than add 10 to page make new request to api and render new view
 def categories_next(request,category, page):
   page = page + 10
+  print(page)
   print(category)
   response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
