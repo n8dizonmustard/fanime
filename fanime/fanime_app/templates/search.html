@@ -53,19 +53,29 @@
 
 
 
-    <!-- showing first list of animes sent to us by api -->
-    <div class="row center">
-        {% for api_anime in response.data%}
-        <div class="col s4">
-            <a id="ani-pix" href="{% url 'detail' api_anime.id %}">
-                <p class="cat" >{{api_anime.attributes.canonicalTitle}}</p>
-                <div class="effect">
-                    <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
-                    </div>
-            </a>
-        </div>
-        {%endfor%}
+<div class="row center">
+    {% for api_anime in response.data%}
+    <div  class="col s4">
+        <a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+            <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+            <div class="effect">
+            <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+            </div>
+        </a>
     </div>
+    {%endfor%}
+</div>
+
+<div class="row center">
+    {% for api_anime in response.data%}
+<div>
+    <a id="mobile-pix" href="{% url 'detail' api_anime.id %}">
+        <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+        <p><img  class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+    </a>
+</div>
+{%endfor%}
+</div>
 
     <div class="row center">
         {% for api_anime in response.data%}
@@ -79,5 +89,16 @@
     </div>
     
     <hr><br><br>
-
+    <div class="center">
+    <h4 style="color:white;"> Can't find what you're looking for?<br>
+    Try searching again.</h4>
+    </div>
+        <form action="{% url 'search'  %}" method="POST" class="col s12">
+        {% csrf_token %}
+        <div class="input-field col s6">
+          <input id="input_text" name="handle" type="text">
+          <label for="input_text">Search For Anime</label>
+           <button class="btn red darken-2">Search</button>
+      </div>
+      </form>
     {% endblock %}
