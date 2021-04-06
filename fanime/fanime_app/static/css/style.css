@@ -18,6 +18,15 @@ body {
 
   }
 
+  .cat{
+    color: black;
+  }
+  .cat:hover{
+    text-decoration: underline;
+    color:red;
+
+  }
+
   #library-h1{
     font-family: 'Alfa Slab One', cursive;
     box-shadow: 5px;
@@ -32,8 +41,11 @@ body {
     font-family: 'Alfa Slab One', cursive;
 
   }
+  @media only screen and (max-width: 991px) {
 
-#logo{
-  margin-left: 5%;
-  margin-right: 5%;
-}
+    #cat-btn{
+    display:none;
+    }
+
+  }
+

@@ -106,6 +106,8 @@ def last(request):
 
 
 
+
+
 @login_required
 def add_photo(request, profile_id):
     # photo-file will be the "name" attribute on the <input type="file">

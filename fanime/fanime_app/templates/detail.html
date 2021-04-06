@@ -3,8 +3,38 @@
 
 {% block content %}
 <body>
-<h1>{{response.data.attributes.canonicalTitle}}</h1>
-<img class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
+<div class="center">
+  <h1>{{response.data.attributes.canonicalTitle}}</h1>
+  <p style="margin-left:5%; margin-right:5%;">{{response.data.attributes.synopsis}}</p>
+</div>
+<div class="row">
+  <div class="col s6">
+    <img  class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
+  </div>
+  <div class="col s5">
+    
+  </div>
+  <div class="col s5">
+    <p>Average Rating: {{response.data.attributes.averageRating}}</p>
+    <p>Start Date: {{response.data.attributes.startDate}}</p>
+    <p>End Date: {{response.data.attributes.endDate}}</p>
+  </div>
+  <div class="col s5">
+    {% for comment in anime.comment_set.all %}
+    {%endfor%}
+    <!-- If user is logged in a comment form is shown -->
+    {% if user.is_authenticated %} 
+    <form action="{% url 'add_comment' api_anime_id %}" method="post">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <input type="submit" class="btn red darken-2" value="Add Comment">
+    </form>
+    {% endif %}
+
+  </div>
+ 
+</div>
+
 <div class="row">
 
   <div class="col s2" style="">
@@ -21,31 +51,12 @@
   </div>
 </div>
 
-  <div>
 
-
-
-    <p>Average Rating: {{response.data.attributes.averageRating}}</p>
-    <p>Start Date: {{response.data.attributes.startDate}}</p>
-    <p>End Date: {{response.data.attributes.endDate}}</p>
-  </div>
 
   <div>
     <br>
-    <p>Description: {{response.data.attributes.synopsis}}</p>
+    
   </div><br><br>
 
 
-  {{api_anime_id}}
-  {% for comment in anime.comment_set.all %}
-  {%endfor%}
-  <!-- If user is logged in a comment form is shown -->
-  {% if user.is_authenticated %} 
-  <form action="{% url 'add_comment' api_anime_id %}" method="post">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <input type="submit" class="btn red darken-2" value="Add Comment">
-  </form>
-  {% endif %}
-</body>
 {% endblock %}
