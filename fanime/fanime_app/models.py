@@ -37,6 +37,4 @@ class Comment(models.Model):
     anime_id = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class Search(models.Model):
-    search = models.CharField(max_length=100)
 
