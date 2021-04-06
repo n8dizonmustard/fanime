@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import FavAnime, Comment, Profile, Photo
+from .models import FavList, Comment, Profile, Photo
 from .forms import CommentForm
 import requests
 import random as r
@@ -18,7 +18,7 @@ BUCKET = 'simanutui'
 def home(request):
   page = '0'
   #making initial request to api for first of the anime list
-  response = requests.get(f'https://kitsu.io/api/edge/anime?fields%5Banime%5D=slug%2CcanonicalTitle%2Ctitles%2CposterImage%2Csynopsis%2CaverageRating%2CstartDate%2CpopularityRank%2CratingRank%2CyoutubeVideoId&filter%5Bcategories%5D=action&page%5Boffset%5D=0&page%5Blimit%5D=20&sort=-user_count').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?fields%5Banime%5D=slug%2CcanonicalTitle%2Ctitles%2CposterImage%2Csynopsis%2CaverageRating%2CstartDate%2CpopularityRank%2CratingRank%2CyoutubeVideoId&filter%5Bcategories%5D=action&page%5Boffset%5D=0&page%5Blimit%5D=18&sort=-user_count').json()
   return render(request, 'home.html',{'response':response, 'page':page}) #rendering home page with the contents of the response
                                                                           #from the api and the page number
 
@@ -32,32 +32,35 @@ def detail(request, api_anime_id):
 ##runs when user clicks a category option
 def categories(request,category):
   page = 0
-  response = requests.get(f'https://kitsu.io/api/edge/anime/?filter[categories]={category}').json() ##category will be diff depending on button
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
 #when a user hits next on category page than add 10 to page make new request to api and render new view
 def categories_next(request,category, page):
   page = page + 10
+  print(page)
   print(category)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
 
 def categories_previous(request,category, page):
   page = page - 10
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=adventure&page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'categories/previous.html', {'response':response, 'category':category,'page':page})
 
 def categories_first(request,category):
   page = 0
   print(category)
-  response = requests.get(f'https://kitsu.io/api/edge/anime/?filter[categories]={category}').json() ##category will be diff depending on button
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
+def search(request):
+  page = 0
+  body = request.POST.get('handle',None)
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
+  
+  return render(request, 'search.html', {'response': response})
 
-def search(request, name):
-  print(name)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter[text]={name}').json() #making new request to api with anime id
-  return render(request, 'search.html', {'response': response, 'name':name})
 
 #still not working sorry
 @login_required
@@ -82,30 +85,32 @@ def random(request):
 #I think we should change our layout and put this on homepage?
 def library(request):
   page = 0
-  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'library.html', {'response':response,'page':page})
   
 def next(request, page):
   page = page + 5 # if a user hit the next button then whatever page is currently at +5 to get the new response
   print(page) # this will help you if you wanna see it in terminal. Helped me
-  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'next.html', {'response':response, 'page': page})
 
 def previous(request, page):
   page = page - 5 #same as next but backward
   print(page)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'previous.html', {'response':response, 'page': page})
 
 def first(request):
   page = '0' #if user hits first page page = 0 
-  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'library.html',{'response':response, 'page':page})
 
 def last(request):
   page = '16143' # according to api docs 16543 is the last page number
-  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'library.html',{'response':response, 'page':page})
+
+
 
 
 
@@ -142,6 +147,10 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+
+    
+
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile

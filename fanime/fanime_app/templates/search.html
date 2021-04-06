@@ -3,6 +3,9 @@
 
 {% block content %}
 
+
+
+    <!-- sending over the category the user picks to urls -->
     <br>
     <div class="center">
         <img class="responsive-img" src="../static/images/fanime.png" alt="">
@@ -31,30 +34,40 @@
         </div>
         <div class="col s4">
             <hr>
-            <a class="cat" href="{% url 'categories' 'adventure' %}">Sports</a><hr>
-            <a class="cat" href="{% url 'categories' 'magic' %}">Kids</a><hr>
-            <a class="cat" href="{% url 'categories' 'action' %}">Romance</a><hr>
-            <a class="cat" href="{% url 'categories' 'horror' %}">Violence</a><hr>
+            <a class="cat" href="{% url 'categories' 'sports' %}">Sports</a><hr>
+            <a class="cat" href="{% url 'categories' 'kids' %}">Kids</a><hr>
+            <a class="cat" href="{% url 'categories' 'romance' %}">Romance</a><hr>
+            <a class="cat" href="{% url 'categories' 'violence' %}">Violence</a><hr>
         </div>
       </div>
     
-    
         
-<!-- showing animes from api -->
-<div class="row center">
-{% for api_anime in response.data%}
-<div class="col s4">
-<a id="ani-pix" href="{% url 'detail' api_anime.id %}">
-<p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
-            <div class="effect">
-            <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
-            </div>
-</a>
-</div>
-{%endfor%}
-</div>
+    <form action="{% url 'search'  %}" method="POST" class="col s12">
+        {% csrf_token %}
+        <div class="input-field col s6">
+          <input id="input_text" name="handle" type="text">
+          <label for="input_text">Search For Anime</label>
+           <button class="btn red darken-2">Search</button>
+      </div>
+      </form>
 
-<div class="row center">
+
+
+    <!-- showing first list of animes sent to us by api -->
+    <div class="row center">
+        {% for api_anime in response.data%}
+        <div class="col s4">
+            <a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+                <p class="cat" >{{api_anime.attributes.canonicalTitle}}</p>
+                <div class="effect">
+                    <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+                    </div>
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+
+    <div class="row center">
         {% for api_anime in response.data%}
     <div>
         <a id="mobile-pix" href="{% url 'detail' api_anime.id %}">
@@ -64,25 +77,7 @@
     </div>
     {%endfor%}
     </div>
+    
+    <hr><br><br>
 
-
-<!-- buttons to jump through pages -->
-<div class="row">
-{%if page != 0%}
-
-<form class="left" action="{% url 'first' %}" >
-    <button class="btn red">First Page</button>
-</form>
-<form class="left" style="margin-left:3%;"action="{% url 'previous' page %}" >
-    <button class="btn red">Previous Page</button>
-</form>
-{%endif%}
-
-<form class="right" style="margin-left:3%;" action="{% url 'last' %}" >
-    <button class="btn red">Last Page</button>
-</form>
-<form class="right" action="{% url 'next' page %}" >
-    <button class="btn red">Next Page</button>
-</form>
-</div>
-{% endblock %}
+    {% endblock %}
