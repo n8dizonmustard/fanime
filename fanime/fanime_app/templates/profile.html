@@ -23,7 +23,7 @@
     </form>
     {% endfor %}
 
-    <p> {{profile.name}}'s favorite anime is <b>{{profile.favorite_anime_ever}}</b></p>
+    <p> Favorite All-Time Anime: <b>{{profile.favorite_anime_ever}}</b></p>
     <p> About: {{profile.about}}</p>
 
     <form action="{% url 'profile_update' profile.id %}">
@@ -31,6 +31,19 @@
     </form>
     {%endfor%}
 </div>
+<hr>
+<div>
+    <h2>Favorites:</h2>
+    {% for anime in profile.fav_list.all %}
+    <ul>
+        <li>{{ anime.api_name }}</li>
+    </ul>
+    {% endfor %}
+</div>
+
+
+
+
 
 
 
