@@ -32,7 +32,7 @@ def detail(request, api_anime_id):
 ##runs when user clicks a category option
 def categories(request,category):
   page = 0
-  response = requests.get(f'https://kitsu.io/api/edge/anime?[categories]&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
 #when a user hits next on category page than add 10 to page make new request to api and render new view
@@ -45,16 +45,21 @@ def categories_next(request,category, page):
 
 def categories_previous(request,category, page):
   page = page - 10
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=adventure&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'categories/previous.html', {'response':response, 'category':category,'page':page})
 
 def categories_first(request,category):
   page = 0
   print(category)
-  response = requests.get(f'https://kitsu.io/api/edge/anime/?filter[categories]={category}').json() ##category will be diff depending on button
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
-
+def search(request):
+  page = 0
+  body = request.POST.get('handle',None)
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
+  
+  return render(request, 'search.html', {'response': response})
 
 
 #still not working sorry
@@ -142,6 +147,10 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+
+    
+
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile

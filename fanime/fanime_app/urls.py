@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('random/', views.random, name='random'),
     path('library/', views.library, name="library"),
+    path('search/', views.search, name='search'),
     path('categories/<str:category>', views.categories, name ='categories'), ##<str:category> is gonna come from the button they click
     path('categories/<str:category>/next/<int:page>', views.categories_next, name='categories_next'),
     path('categories/<str:category>/previous/<int:page>', views.categories_previous, name='categories_previous'),
