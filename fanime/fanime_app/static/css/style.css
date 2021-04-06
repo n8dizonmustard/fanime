@@ -2,11 +2,18 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: none;
+   
+  
+   
+    
   }
   
   main {
     flex: 1 0 auto;
+  }
+
+  .login:hover{
+    text-decoration: underline;
   }
   
   footer.page-footer {
@@ -15,6 +22,25 @@ body {
   }
   h1{
     font-family: 'Alfa Slab One', cursive;
+
+  }
+
+  .effect{
+    overflow:hidden;
+    margin: 0 auto;
+}
+.effect img {
+  transition: 0.5s all ease-in-out;
+}
+.effect:hover img{
+  transform: scale(1.1);
+}
+  .cat{
+    color: white;
+  }
+  .cat:hover{
+    text-decoration: underline;
+    color:red;
 
   }
 
@@ -32,8 +58,24 @@ body {
     font-family: 'Alfa Slab One', cursive;
 
   }
+  #mobile-pix{
+    display:none;
+  }
+  @media only screen and (max-width: 1315px) {
+    #ani-pix{
+     display:none;
+    }
+    #mobile-pix{
+      display:contents;
+      
+    }
+  }
 
-#logo{
-  margin-left: 5%;
-  margin-right: 5%;
-}
+  @media only screen and (max-width: 991px) {
+
+    #cat-btn{
+    display:none;
+    }
+
+  }
+
