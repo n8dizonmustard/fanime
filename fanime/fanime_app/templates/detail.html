@@ -21,6 +21,7 @@
   </div>
   <div class="col s5">
     {% for comment in anime.comment_set.all %}
+    {{comment.comment}}
     {%endfor%}
     <!-- If user is logged in a comment form is shown -->
     {% if user.is_authenticated %} 
