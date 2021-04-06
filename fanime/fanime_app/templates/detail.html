@@ -29,6 +29,8 @@
       {{ comment_form.as_p }}
       <input type="submit" class="btn red darken-2" value="Add Comment">
     </form>
+    {%else%}
+    <h5 style="color:white;">Please <a class="login" href="{% url 'login' %}">log in</a> to comment</h5>
     {% endif %}
 
   </div>
