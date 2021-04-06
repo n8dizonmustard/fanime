@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import FavList, Comment, Profile, Photo
+from .models import Anime, Comment, Profile, Photo
 from .forms import CommentForm
 import requests
 import random as r
