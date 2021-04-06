@@ -19,9 +19,6 @@ class Profile(models.Model):
     favorite_anime_ever = models.CharField(max_length=100)
     about = models.TextField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fav_anime_id = models.IntegerField()
-    fav_anime_name = models.CharField(max_length=100)
-    fav_list = models.ManyToManyField(FavList)
     def __str__(self):
         return self.name
 
