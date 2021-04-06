@@ -4,53 +4,78 @@
 {% block content %}
 
 <body>
-  <h1>{{response.data.attributes.canonicalTitle}}</h1>
-  <img class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
-  <div class="row">
 
-    <div class="col s2" style="">
+  <div class="center">
+    <h1 style="color:white;">{{response.data.attributes.canonicalTitle}}</h1>
+    <p style="color:white;margin-left:5%; margin-right:5%;">{{response.data.attributes.synopsis}}</p>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <img class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
+    </div>
+    <div class="col s5">
+
+    </div>
+    <div class="col s5">
+      <p style="color:white;">Average Rating: {{response.data.attributes.averageRating}}</p>
+      <p style="color:white;">Start Date: {{response.data.attributes.startDate}}</p>
+      <p style="color:white;">End Date: {{response.data.attributes.endDate}}</p>
+    </div>
+    <div class="col s5">
+      {% for comment in anime.comment_set.all %}
+      {%endfor%}
+      <!-- If user is logged in a comment form is shown -->
+      {% if user.is_authenticated %}
+      <form action="{% url 'add_comment' api_anime_id %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" class="btn red darken-2" value="Add Comment">
+      </form>
+      {%else%}
+      <h5 style="color:white;">Please <a class="login" href="{% url 'login' %}">log in</a> to comment</h5>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  <div class="row center">
+    <div class="col s2">
       <form action="" method="post">
         {% csrf_token %}
-        <button type="submit" class="btn red darken-2">ADD TO FAVORITES</button>
+        <button type="submit" class="btn red darken-2">FAVORITE</button>
       </form>
     </div>
-    <div class="col s2" style="">
+    <div class="col s2">
       <form action="">
         {% csrf_token %}
-        <button type="submit" class="btn red darken-2">ADD TO WATCHLIST</button>
+        <button type="submit" class="btn red darken-2">WATCHLIST</button>
       </form>
     </div>
-  </div>
-
-  <div>
 
 
 
-    <p>Average Rating: {{response.data.attributes.averageRating}}</p>
-    <p>Start Date: {{response.data.attributes.startDate}}</p>
-    <p>End Date: {{response.data.attributes.endDate}}</p>
-  </div>
+    <div>
+      <br>
 
-  <div>
+    </div><br><br>
+
     <br>
     <p>Description: {{response.data.attributes.synopsis}}</p>
-  </div><br><br>
 
-  <br>
-  <p>Description: {{response.data.attributes.synopsis}}</p>
-
-  {{api_anime_id}}
-  {% for comment in anime.comment_set.all %}
-  {%endfor%}
+    {{api_anime_id}}
+    {% for comment in anime.comment_set.all %}
+    {%endfor%}
 
 
-  <!-- If user is logged in a comment form is shown -->
-  {% if user.is_authenticated %}
-  <form action="{% url 'add_comment' api_anime_id %}" method="post">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <input type="submit" class="btn red darken-2" value="Add Comment">
-  </form>
-  {% endif %}
+    <!-- If user is logged in a comment form is shown -->
+    {% if user.is_authenticated %}
+    <form action="{% url 'add_comment' api_anime_id %}" method="post">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
 
-  {% endblock %}
+      <input type="submit" class="btn red darken-2" value="Add Comment">
+    </form>
+    {% endif %}
+
+    {% endblock %}

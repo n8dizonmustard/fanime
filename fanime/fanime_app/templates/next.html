@@ -2,114 +2,68 @@
 
 
 {% block content %}
-<div class="center">
-<h1>ALL ANIME</h1>
-</div>
 
-<!-- this does nothing right now but will be used to search anime by name -->
-    <form class="col s12">
-        <div class="input-field col s6">
-          <input id="input_text" type="text">
-          <label for="input_text">Search For Anime</label>
+
+    <br>
+    <div class="center">
+        <img class="responsive-img" src="../static/images/fanime.png" alt="">
+    </div>
+    <hr>
+    
+    <div class="card red center">
+        <blockquote>
+            <h1> CATEGORIES </h1>
+        </blockquote>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <hr>
+            <a class="cat" href="{% url 'categories' 'adventure' %}">Adventure</a><hr>
+            <a class="cat" href="{% url 'categories' 'magic' %}">Magic</a><hr>
+            <a class="cat" href="{% url 'categories' 'action' %}">Action</a><hr>
+            <a class="cat" href="{% url 'categories' 'horror' %}">Horror</a><hr>
+        </div>
+        <div class="col s4">
+            <hr>
+            <a class="cat" href="{% url 'categories' 'mecha' %}">Mecha</a><hr>
+            <a class="cat" href="{% url 'categories' 'drama' %}">Drama</a><hr>
+            <a class="cat" href="{% url 'categories' 'comedy' %}">Comedy</a><hr>
+            <a class="cat" href="{% url 'categories' 'thriller' %}">Thriller</a><hr>
+        </div>
+        <div class="col s4">
+            <hr>
+            <a class="cat" href="{% url 'categories' 'adventure' %}">Sports</a><hr>
+            <a class="cat" href="{% url 'categories' 'magic' %}">Kids</a><hr>
+            <a class="cat" href="{% url 'categories' 'action' %}">Romance</a><hr>
+            <a class="cat" href="{% url 'categories' 'horror' %}">Violence</a><hr>
+        </div>
       </div>
-<!-- sending over the category the user picks to urls -->
-<h2 class="center">Search by genre</h2>
-<div class="row">
-
-    <div class="col s1" style="margin-left: 5%; margin-right:7%;">
-        <form action="{% url 'categories' 'adventure' %}">
-            <button type="submit" class="btn red darken-2">ADVENTURE</button>
-        </form>
-    </div>
     
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'magic' %}">
-            <button type="submit" class="btn red darken-2">MAGIC</button>
-        </form>
-    </div>
-    
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'action' %}">
-            <button type="submit" class="btn red darken-2">ACTION</button>
-        </form>
-    </div>
-
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'horror' %}">
-            <button type="submit" class="btn red darken-2">HORROR</button>
-        </form>
-    </div>
-
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'mecha' %}">
-            <button type="submit" class="btn red darken-2">MECHA</button>
-        </form>
-    </div>
-
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'drama' %}">
-            <button type="submit" class="btn red darken-2">DRAMA</button>
-        </form>
-    </div>
-
-    <div class="col s1" style="margin-right:4%;">
-        <form action="{% url 'categories' 'comedy' %}">
-            <button type="submit" class="btn red darken-2">COMEDY</button>
-        </form>
-    </div>
-
-</div>
-<div class="row">
-<div class="col s1" style="margin-left:5%; margin-right:4%;">
-    <form action="{% url 'categories' 'thriller' %}">
-        <button type="submit" class="btn red darken-2">THRILLER</button>
-    </form>
-</div>
-
-<div class="col s1" style="margin-right:4%;">
-    <form action="{% url 'categories' 'sports' %}">
-        <button type="submit" class="btn red darken-2">SPORTS</button>
-    </form>
-</div>
-<div class="col s1" style="margin-right:1%;">
-    <form action="{% url 'categories' 'kids' %}">
-        <button type="submit" class="btn red darken-2">KIDS</button>
-    </form>
-</div>
-<div class="col s1" style="margin-right:4%;">
-    <form action="{% url 'categories' 'romance' %}">
-        <button type="submit" class="btn red darken-2">ROMANCE</button>
-    </form>
-</div>
-<div class="col s1" style="margin-right:4%;">
-    <form action="{% url 'categories' 'violence' %}">
-        <button type="submit" class="btn red darken-2">VIOLENCE</button>
-    </form>
-</div>
-<div class="col s1" style="margin-right:9%;">
-    <form action="{% url 'categories' 'psychological' %}">
-        <button type="submit" class="btn red darken-2">PSYCHOLOGICAL</button>
-    </form>
-</div>
-<div class="col s1" style="margin-right:4%;">
-    <form action="{% url 'categories' 'mystery' %}">
-        <button type="submit" class="btn red darken-2">MYSTERY</button>
-    </form>
-</div>
-</div>
-<hr>
+        
 
 <!-- showing animes from api -->
-<div class="row">
+<div class="row center">
 {% for api_anime in response.data%}
-<div class="col s3">
-<a href="{% url 'detail' api_anime.id %}">
-<p>{{api_anime.attributes.canonicalTitle}}</p>
-<p><img class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""><p>
+<div class="col s4">
+<a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+<p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+            <div class="effect">
+            <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+            </div>
 </a>
 </div>
 {%endfor%}
 </div>
+<div class="row center">
+        {% for api_anime in response.data%}
+    <div>
+        <a id="mobile-pix" href="{% url 'detail' api_anime.id %}">
+            <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
+            <p><img  class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
+        </a>
+    </div>
+    {%endfor%}
+    </div>
 
 
 <!-- buttons to jump through pages -->
