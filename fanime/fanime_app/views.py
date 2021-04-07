@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import FavList, Comment, Profile, Photo
+from .models import Anime, Comment, Profile, Photo
 from .forms import CommentForm
 import requests
 import random as r
@@ -175,12 +175,10 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def add_favorite(request, api_anime_id, api_anime_name):
-  profile = Profile.objects.filter(user=request.user)
-  profile.fav_anime_id = api_anime_id
-  profile.fav_anime_name = api_anime_name
-  print(profile.fav_anime_name)
-  comment_form = CommentForm() 
+  print(Anime.api_name)
+  anime = Anime.api_name
+  id = Anime.api_id
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
-  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id})
 
 
