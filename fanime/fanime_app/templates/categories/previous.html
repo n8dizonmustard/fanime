@@ -38,6 +38,15 @@
         </div>
       </div>
 
+          <form action="{% url 'search'  %}" method="POST" class="col s12">
+        {% csrf_token %}
+        <div class="input-field col s6">
+          <input id="input_text" name="handle" type="text">
+          <label for="input_text">Search For Anime</label>
+           <button class="btn red darken-2">Search</button>
+      </div>
+      </form>
+
 <!-- Next set of animes is now being shown to user -->
    <div class="card red center">
         <blockquote>
