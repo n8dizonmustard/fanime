@@ -66,6 +66,7 @@ def search(request):
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):
+  print('ADD COMMENT FIRING!!! PEW PEW')
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
