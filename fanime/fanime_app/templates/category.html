@@ -10,7 +10,7 @@
 
 <div class="card red center">
     <blockquote>
-        <h1> CATEGORIES </h1>
+        <h1 class="title"> CATEGORIES </h1>
     </blockquote>
 </div>
 <div class="row">
@@ -48,10 +48,18 @@
         <hr>
     </div>
 </div>
+    <form action="{% url 'search'  %}" method="POST" class="col s12">
+        {% csrf_token %}
+        <div class="input-field col s6">
+          <input id="input_text" name="handle" type="text">
+          <label for="input_text">Search For Anime</label>
+           <button class="btn red darken-2">Search</button>
+      </div>
+      </form>
 
 <div class="card red center">
     <blockquote>
-        <h1> {{category.capitalize}} Anime</h1>
+        <h1 class="title"> {{category.capitalize}} Anime</h1>
     </blockquote>
 </div>
 <!-- showing animes from api -->

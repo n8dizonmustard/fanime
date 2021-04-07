@@ -58,7 +58,7 @@ def categories_first(request,category):
 def search(request):
   page = 0
   body = request.POST.get('handle',None)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=18&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=12&page%5Boffset%5D={page}').json()
   return render(request, 'search.html', {'response': response, 'body':body, 'page':page})
 
 #still not working sorry
