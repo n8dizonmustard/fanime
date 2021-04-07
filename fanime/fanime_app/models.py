@@ -37,8 +37,7 @@ class Photo(models.Model):
 class Comment(models.Model):
     comment = models.CharField(max_length=300)
     anime_id = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
-
-
-
+    def __str__(self):
+        return f"{self.user}: {self.comment}"
