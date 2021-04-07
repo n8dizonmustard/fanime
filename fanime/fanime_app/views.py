@@ -188,4 +188,8 @@ def add_favorite(request, api_anime_id, api_anime_name):
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id})
 
+def delete_favorite(request, anime_api_id):
+
+  return render(request, 'profile.html')
+
 
