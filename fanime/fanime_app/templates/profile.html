@@ -34,9 +34,9 @@
 <hr>
 <div>
     <h2>Favorites:</h2>
-    {% for anime in profile.fav_list.all %}
+    {% for anime in user.profile.favs.all %}
     <ul>
-        <li>{{ anime.api_name }}</li>
+        <li><a href="">{{ anime.api_name }}</a></li>
     </ul>
     {% endfor %}
 </div>
