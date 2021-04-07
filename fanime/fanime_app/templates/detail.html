@@ -35,9 +35,9 @@
     {% endif %}
     <br>
     <h4 style="color:white">Comments:</h4>
-    {% for comment in user.profile.comment_set.all %}
+    {% for comment in user.comment_set.all %}
     <ul>
-      <li>{{comment.user}}: {{comment.comment}}</li>
+      <li style="color:white">{{comment.user}}: {{comment.comment}}</li>
     </ul>
     {% endfor %}
   </div>
