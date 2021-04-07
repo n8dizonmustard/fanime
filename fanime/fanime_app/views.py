@@ -22,9 +22,11 @@ def home(request):
   return render(request, 'home.html',{'response':response, 'page':page}) #rendering home page with the contents of the response
                                                                           #from the api and the page number
 
-def detail(request, api_anime_id):
+def detail(request, api_anime_id, api_anime_name):
   print(api_anime_id) #api_anime_id is the id im getting from the api not our models
   comment_form = CommentForm() 
+  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
+  new_anime.save()
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
 
@@ -58,7 +60,7 @@ def categories_first(request,category):
 def search(request):
   page = 0
   body = request.POST.get('handle',None)
-  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=18&page%5Boffset%5D={page}').json()
+  response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Btext%5D={body}&page%5Blimit%5D=12&page%5Boffset%5D={page}').json()
   return render(request, 'search.html', {'response': response, 'body':body, 'page':page})
 
 #still not working sorry
@@ -175,9 +177,10 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def add_favorite(request, api_anime_id, api_anime_name):
-  print(Anime.api_name)
-  anime = Anime.api_name
-  id = Anime.api_id
+  print(api_anime_id, api_anime_name)
+  profile = Profile.objects.filter(user=request.user)
+  anime = Anime.objects.get(id=api_anime_id)
+  profile[0].favs.add(anime)
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id})
 
