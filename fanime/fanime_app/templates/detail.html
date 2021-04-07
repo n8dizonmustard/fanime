@@ -33,7 +33,13 @@
     {%else%}
     <h5 style="color:white;">Please <a class="login" href="{% url 'login' %}">log in</a> to comment</h5>
     {% endif %}
-
+    <br>
+    <h4 style="color:white">Comments:</h4>
+    {% for comment in user.profile.comment_set.all %}
+    <ul>
+      <li>{{comment.user}}: {{comment.comment}}</li>
+    </ul>
+    {% endfor %}
   </div>
  
 </div>
