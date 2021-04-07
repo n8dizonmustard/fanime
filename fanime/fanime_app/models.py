@@ -9,10 +9,8 @@ from django.contrib.auth.models import User
 #for example cowboy bebop id is 1 and the link is https://kitsu.io/api/edge/anime/1 
 #I think we can work with that
 class Anime(models.Model):
-    api_link = models.CharField(max_length=100)
     api_id = models.CharField(max_length=10)
     api_name = models.CharField(max_length=100)
-
     def __str__(self):
         return self.api_name
 

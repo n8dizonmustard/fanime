@@ -37,13 +37,16 @@ body {
 }
   .cat{
     color: white;
+    font-size: 90%;
   }
   .cat:hover{
     text-decoration: underline;
     color:red;
 
   }
-
+.title{
+  font-size:375%;
+}
   #library-h1{
     font-family: 'Alfa Slab One', cursive;
     box-shadow: 5px;

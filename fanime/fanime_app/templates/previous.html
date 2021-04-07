@@ -11,7 +11,7 @@
     
     <div class="card red center">
         <blockquote>
-            <h1> CATEGORIES </h1>
+            <h1 class="title"> CATEGORIES </h1>
         </blockquote>
     </div>
     <div class="row">
@@ -44,7 +44,7 @@
 <div class="row center">
 {% for api_anime in response.data%}
 <div class="col s4">
-<a id="ani-pix" href="{% url 'detail' api_anime.id %}">
+<a id="ani-pix" href="{% url 'detail' api_anime.id api_anime.attributes.canonicalTitle %}">
 <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
             <div class="effect">
             <p><img  id="effect-img" class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
@@ -57,7 +57,7 @@
 <div class="row center">
         {% for api_anime in response.data%}
     <div>
-        <a id="mobile-pix" href="{% url 'detail' api_anime.id %}">
+        <a id="mobile-pix" href="{% url 'detail' api_anime.id api_anime.attributes.canonicalTitle %}">
             <p class="cat">{{api_anime.attributes.canonicalTitle}}</p>
             <p><img  class="responsive-img" src="{{api_anime.attributes.posterImage.small}}" alt=""></p>
         </a>
