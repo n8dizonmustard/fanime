@@ -81,7 +81,10 @@ def random(request):
   api_anime_id = r.randint(0,4292)
   comment_form = CommentForm() 
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
-  return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id, 'comment_form':comment_form})
+  api_anime_name = response['data']['attributes']['canonicalTitle']
+  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
+  new_anime.save()
+  return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id, 'api_anime_name': api_anime_name, 'comment_form':comment_form})
 
 #Showing most popular animes according to kitsu
 #I think we should change our layout and put this on homepage?
