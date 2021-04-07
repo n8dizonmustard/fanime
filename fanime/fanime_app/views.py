@@ -64,6 +64,7 @@ def search(request):
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):
+  print('ADD COMMENT FIRING!!! PEW PEW')
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
@@ -175,7 +176,6 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def add_favorite(request, api_anime_id, api_anime_name):
-  print(Anime.api_name)
   anime = Anime.api_name
   id = Anime.api_id
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
