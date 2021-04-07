@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <header >
+    <header>
         <nav class="navbar-fixed">
             <div class="nav-wrapper black">
                 <ul>
@@ -27,14 +27,26 @@
                 </ul>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
-                    <li class="active"><a href="{% url 'home' %}">HOME</a></li>
+                    <li class="active"><a href="{% url 'home' %}">
+                            <span>HOME</span>
+                            <i class="material-icons right red-text">home</i>
+                        </a></li>
                     <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
                     <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-                    <li><a href="{% url 'profile' %}">PROFILE</a></li>
+                    <li><a href="{% url 'logout' %}">
+                            <span>LOGOUT</span>
+                            <i class="material-icons right red-text">logout</i>
+
+                        </a></li>
+
+                    <li><a href="{% url 'profile' %}">
+                            <span>PROFILE</span>
+                            <i class="material-icons right red-text">account_circle</i>
+
+                        </a></li>
                 </ul>
                 {% else %}
                 <ul class="right hide-on-med-and-down">
@@ -58,7 +70,7 @@
             <li><a href="{% url 'signup' %}">SIGNUP</a></li>
             <li><a href="{% url 'login' %}">LOGIN</a></li>
             {%endif%}
-          </ul>
+        </ul>
     </header>
 
 
@@ -69,8 +81,9 @@
 
     <footer class="page-footer black">
         <div class="right">All Rights Reserved, &copy; 2021 Fanime &nbsp;</div>
-     </footer>
+    </footer>
 
 
 </body>
+
 </html>
