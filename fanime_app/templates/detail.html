@@ -49,7 +49,7 @@
     <h4 style="text-align:center; color:red;">Comments</h4>
     <ul class="collection ">
     {% for comment in comments %}
-      <li style=""class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
+      <li class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
     {% endfor %}
   </ul>
     {%else%}
