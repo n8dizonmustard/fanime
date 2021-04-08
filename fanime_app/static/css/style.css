@@ -98,3 +98,13 @@ body {
 h1{
   word-wrap: break-word;
 }
+
+.login{
+  position: relative;
+  left: 15px;
+  max-width: 95%;
+}
+
+#login-title{
+  color: #c40301;
+}
