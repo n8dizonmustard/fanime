@@ -45,21 +45,32 @@
 
     </div>
 
-    <div class="row center">
-        {% for anime in user.profile.favs.all %}
-        <div class="col s4">
-            <a href="{% url 'detail' anime.api_id anime.api_name %}">
-                <p style="width:70%; height:auto; margin-left:15%;" class="cat">{{anime.api_name}}</p>
-                <div class="effect">
-                    <a href="{% url 'detail' anime.api_id anime.api_name %}"><img style="width:50%; height:auto"
-                            id="effect-img" class="responsive-img" src="{{ anime.api_img }}" alt=""></a>
-                </div>
-                <a href="{% url 'delete_favorite' anime.api_id %}">Remove</a>
-            </a>
-        </div>
-        {%endfor%}
-    </div>
 
+
+<div class="row center">
+    {% for anime in user.profile.favs.all%}
+    <div  class="col s4">
+        <a id="ani-pix" href="{% url 'detail' anime.api_id anime.api_name %}">
+            <p class="cat">{{anime.api_name}}</p>
+            <div class="effect">
+            <p><img  id="effect-img" class="responsive-img" src="{{ anime.api_img }}" alt=""></p>
+            </div>
+        </a>
+    </div>
+    {%endfor%}
+</div>
+
+<div class="row center">
+    {% for anime in user.profile.favs.all%}
+<div>
+    <a id="mobile-pix" href="{% url 'detail' anime.api_id anime.api_name %}">
+        <p class="cat">{{anime.api_name}}</p>
+        <p><img  class="responsive-img" src="{{ anime.api_img }}" alt=""></p>
+    </a>
+</div>
+{%endfor%}
+</div>
+<hr><br><br>
 
     {% else %}
     <h1>This is your profile page</h1>
