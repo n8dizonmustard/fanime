@@ -91,11 +91,16 @@ body {
 
   }
 
-#fav-delete{
-  font-size: 20px;
+.fav-delete{
+  color: red;
+  font-size: 120%;
   vertical-align: middle;
   margin-left: 10px;
 
+}
+
+.fav-delete:hover {
+  text-decoration: underline;
 }
 
 h1{
