@@ -2,7 +2,7 @@
 
 FANIME is a user based web app that lets you track and organize data about the Anime shows or movies you are interested in. Users can create a profile, upload a profile picture including information such as your name, Favorite Anime, an about you input to give a short introduction to who you are. Once you are Signed up, and logged in you can explore Fanimes huge library of Anime, or to narrow it down we have genres, and a search bar. 
 
-![Imgur](https://imgur.com/f8yGKVo))
+![Imgur](https://i.imgur.com/f8yGKVo.png)
 ### Technologies Used
 - Python3, HTML, CSS
 - Materialize
