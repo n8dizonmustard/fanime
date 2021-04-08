@@ -184,7 +184,8 @@ def add_favorite(request, api_anime_id, api_anime_name):
 
 def delete_favorite(request, anime_api_id):
   profile = Profile.objects.filter(user=request.user)
-  print(profile[0].favs)
-  return render(request, 'profile.html')
+  anime = Anime.objects.get(id = anime_api_id)
+  profile[0].favs.remove(anime)
+  return render(request, 'profile.html' ,{'profile': profile})
 
 

@@ -15,7 +15,7 @@
     </div>
 
     {% for photo in profile.photo_set.all %}
-    <img class="responsive-img" src="{{photo.url}}">
+    <img id="profile_pic" class="responsive-img" src="{{photo.url}}">
     {% empty %}
     <div class="card-panel red-text center-align">No Profile Picture</div>
     <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
@@ -46,7 +46,7 @@
     
     {% for anime in user.profile.favs.all %}
     <ul>
-        <li><a class="cat"href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a href="">X</a></li>
+        <li><a class="cat"href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a href="{% url 'delete_favorite' anime.api_id %}">X</a></li>
     </ul>
     {% endfor %}
 </div>
