@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 class Anime(models.Model):
     api_id = models.CharField(max_length=10)
     api_name = models.CharField(max_length=100)
+    api_img = models.CharField(max_length=100)
     def __str__(self):
         return self.api_name
 
