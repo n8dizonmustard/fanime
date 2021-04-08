@@ -10,6 +10,17 @@
 <div class="row">
   <div class="col s6">
     <img  class="responsive-img" src="{{response.data.attributes.posterImage.medium}}" alt="">
+    {% if user.is_authenticated %} 
+    <form style="margin-left:26%;" action="{% url 'add_favorite' api_anime_id response.data.attributes.canonicalTitle %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn red darken-2">FAVORITE</button>
+    </form>
+    {%else%}
+    <form style="margin-left:26%;" action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn red darken-2">FAVORITE</button>
+    </form>
+    {%endif%}
   </div>
   <div class="col s5">
     
@@ -31,14 +42,14 @@
       <input type="submit" class="btn red darken-2" value="Add Comment">
     </form>
     {%else%}
-    <h5 style="color:white;">Please <a class="login" href="{% url 'login' %}">log in</a> to comment</h5>
+    <h5 class="center" style="color:white;">Please <a class="login" href="{% url 'login' %}">log in</a> to comment</h5>
     {% endif %}
     <br>
     {%if comments%}
     <h4 style="text-align:center; color:red;">Comments</h4>
     <ul class="collection ">
     {% for comment in comments %}
-      <li style=""class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
+      <li class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
     {% endfor %}
   </ul>
     {%else%}
@@ -47,14 +58,7 @@
   </div>
 </div>
   
-<div class="row center">
-  <div class="col s4">
-    <form action="{% url 'add_favorite' api_anime_id response.data.attributes.canonicalTitle %}" method="post">
-      {% csrf_token %}
-      <button type="submit" class="btn red darken-2">FAVORITE</button>
-    </form>
-  </div>
-</div>
+
 
 
 
