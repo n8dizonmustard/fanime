@@ -76,7 +76,21 @@ def add_comment(request, api_anime_id):
 def random(request):
   api_anime_id = r.randint(0,4292)
   comment_form = CommentForm() 
+  print(api_anime_id)
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  while response == {
+  "errors": [
+    {
+      "title": "Record not found",
+      "detail": f"The record identified by {api_anime_id} could not be found.",
+      "code": "404",
+      "status": "404"
+    }
+  ]
+}:
+    api_anime_id = r.randint(0,4292)
+    print('fixing stuffffff')
+    response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
   api_anime_name = response['data']['attributes']['canonicalTitle']
   new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
   new_anime.save()
