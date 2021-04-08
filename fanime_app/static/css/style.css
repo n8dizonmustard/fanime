@@ -46,6 +46,8 @@ body {
   }
 .title{
   font-size:375%;
+  word-wrap: break-word;
+
 }
   #library-h1{
     font-family: 'Alfa Slab One', cursive;
