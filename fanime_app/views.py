@@ -63,6 +63,7 @@ def search(request):
   return render(request, 'search.html', {'response': response, 'body':body, 'page':page})
 
 #still not working sorry
+#working now justin
 @login_required
 def add_comment(request, api_anime_id):
   print('ADD COMMENT FIRING!!! PEW PEW')
