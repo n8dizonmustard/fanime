@@ -2,11 +2,11 @@
 {% block content %}
 
 <div class-"center">
-<h1 style="color:white;">Sign Up</h1>
+<h1 style="color:white;" class="login-page">Sign Up</h1>
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
-<form method="post" action="{% url 'signup' %}">
+<form method="post" action="{% url 'signup' %}" class="login-page">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" class="btn red darken-2" value="signup">
