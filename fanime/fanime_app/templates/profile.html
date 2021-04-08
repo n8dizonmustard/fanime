@@ -11,7 +11,7 @@
         <blockquote>
             <h1 class="title">{{profile.name}}'s Profile </h1>
         </blockquote>
-  
+
     </div>
 
     {% for photo in profile.photo_set.all %}
@@ -27,8 +27,9 @@
     </form>
     {% endfor %}
 
-    <p> Favorite All-Time Anime: <b>{{profile.favorite_anime_ever}}</b></p>
-    <p> About: {{profile.about}}</p>
+    <p style="color:white; font-size:200%;"> Favorite All-Time Anime: <b
+            style="color:red;">{{profile.favorite_anime_ever}}</b></p>
+    <p style="color:white; font-size:200%;"> About: {{profile.about}}</p>
 
     <form action="{% url 'profile_update' profile.id %}">
         <button type="submit" class="btn red darken-2">Edit Profile</button>
@@ -41,19 +42,27 @@
         <blockquote>
             <h1 class="title"> FAVORITES </h1>
         </blockquote>
-  
+
     </div>
-    
-    {% for anime in user.profile.favs.all %}
-    <ul>
-        <li><a class="cat"href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a href="{% url 'delete_favorite' anime.api_id %}">X</a></li>
-    </ul>
-    {% endfor %}
-</div>
+
+    <div class="row center">
+        {% for anime in user.profile.favs.all %}
+        <div class="col s4">
+            <a href="{% url 'detail' anime.api_id anime.api_name %}">
+                <p style="width:70%; height:auto; margin-left:15%;" class="cat">{{anime.api_name}}</p>
+                <div class="effect">
+                    <a href="{% url 'detail' anime.api_id anime.api_name %}"><img style="width:50%; height:auto"
+                            id="effect-img" class="responsive-img" src="{{ anime.api_img }}" alt=""></a>
+                </div>
+                <a href="{% url 'delete_favorite' anime.api_id %}">Remove</a>
+            </a>
+        </div>
+        {%endfor%}
+    </div>
 
 
-{% else %}
-<h1>This is your profile page</h1>
-<h2>Please <a href="{% url 'profile_create' %}">create profile</a> to get started</h2>
-{%endif%}
-{% endblock %}
+    {% else %}
+    <h1>This is your profile page</h1>
+    <h2>Please <a href="{% url 'profile_create' %}">create profile</a> to get started</h2>
+    {%endif%}
+    {% endblock %}

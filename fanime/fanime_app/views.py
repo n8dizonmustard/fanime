@@ -24,10 +24,13 @@ def home(request):
 
 def detail(request, api_anime_id, api_anime_name):
   comment_form = CommentForm() 
-  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  comments = Comment.objects.filter(anime_id = api_anime_id)
+  api_anime_img = response['data']['attributes']['posterImage']['small']
+  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name, api_anime_img)
   new_anime.save()
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
-  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form})
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form, 'comments':comments})
 
 def forum(request):
   return render(request, 'forum.html')
@@ -62,12 +65,17 @@ def search(request):
 #still not working sorry
 @login_required
 def add_comment(request, api_anime_id):
+  print('ADD COMMENT FIRING!!! PEW PEW')
+  comments = Comment.objects.filter(anime_id = api_anime_id)
+  comment_form = CommentForm()
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
     new_comment.anime_id = api_anime_id
+    new_comment.user_id = request.user.id
     new_comment.save()
-  return redirect('detail', api_anime_id=api_anime_id)
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form, 'comments':comments})
 
 
 #this is cool. random animes when you dont know what to watch
@@ -90,8 +98,9 @@ def random(request):
     api_anime_id = r.randint(0,4292)
     print('fixing stuffffff')
     response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  api_anime_img = response['data']['attributes']['posterImage']['small']
   api_anime_name = response['data']['attributes']['canonicalTitle']
-  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
+  new_anime = Anime(api_anime_id, api_anime_id, api_anime_name, api_anime_img)
   new_anime.save()
   return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id, 'api_anime_name': api_anime_name, 'comment_form':comment_form})
 

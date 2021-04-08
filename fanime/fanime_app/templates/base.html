@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fanime</title>
+    <title>Fanime | ANIME FOR FANS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -31,8 +32,16 @@
                             <span>HOME</span>
                             <i class="material-icons right red-text">home</i>
                         </a></li>
-                    <li><a href="{% url 'random' %}">RANDOM ANIME</a></li>
-                    <li><a href="{% url 'library' %}">ANIME LIBRARY</a></li>
+                    <li><a href="{% url 'random' %}">
+                            <span>RANDOM ANIME</span>
+                            <i class="material-icons right red-text">shuffle_on</i>
+
+                        </a></li>
+                    <li><a href="{% url 'library' %}">
+                            <span>ANIME LIBRARY</span>
+                            <i class="material-icons right red-text">apps</i>
+
+                        </a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="right hide-on-med-and-down">
@@ -50,12 +59,24 @@
                 </ul>
                 {% else %}
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{% url 'signup' %}">SIGNUP</a></li>
-                    <li><a href="{% url 'login' %}">LOGIN</a></li>
+                    <li><a href="{% url 'signup' %}">
+                            <span>SIGNUP</span>
+                            <i class="material-icons right red-text">person_add</i>
+
+                        </a></li>
+                    <li><a href="{% url 'login' %}">
+                            <span>LOGIN</span>
+                            <i class="material-icons right red-text">login</i>
+
+                        </a></li>
                 </ul>
                 {% endif %}
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{% url 'forum' %}">FORUM</a></li>
+                    <li><a href="{% url 'forum' %}">
+                            <span>FORUM</span>
+                            <i class="material-icons right red-text">forum</i>
+
+                        </a></li>
                 </ul>
             </div>
         </nav>
