@@ -94,3 +94,7 @@ body {
   margin-left: 10px;
 
 }
+
+h1{
+  word-wrap: break-word;
+}
