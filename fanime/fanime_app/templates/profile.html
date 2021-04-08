@@ -7,11 +7,15 @@
 {% if profile%}
 {%for profile in profile%}
 <div class="center">
-    <h1> {{profile.name}}'s Profile </h1>
-
+    <div class="card red center">
+        <blockquote>
+            <h1 class="title">{{profile.name}}'s Profile </h1>
+        </blockquote>
+  
+    </div>
 
     {% for photo in profile.photo_set.all %}
-    <img class="responsive-img" src="{{photo.url}}">
+    <img id="profile_pic" class="responsive-img" src="{{photo.url}}">
     {% empty %}
     <div class="card-panel red-text center-align">No Profile Picture</div>
     <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
@@ -32,11 +36,17 @@
     {%endfor%}
 </div>
 <hr>
-<div>
-    <h2>Favorites:</h2>
+<div class="center">
+    <div class="card red center">
+        <blockquote>
+            <h1 class="title"> FAVORITES </h1>
+        </blockquote>
+  
+    </div>
+    
     {% for anime in user.profile.favs.all %}
     <ul>
-        <li><a href="">{{ anime.api_name }}</a></li>
+        <li><a class="cat"href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a href="{% url 'delete_favorite' anime.api_id %}">X</a></li>
     </ul>
     {% endfor %}
 </div>

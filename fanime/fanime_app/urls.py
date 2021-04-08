@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/create/', views.ProfileCreate.as_view(), name="profile_create"),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name="profile_update"),
     path('profile/<int:profile_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('profile/<int:anime_api_id>/delete_favorite', views.delete_favorite, name='delete_favorite'),
     path('accounts/signup/', views.signup, name='signup'),
     path('forum/', views.forum, name='forum'),
 ]
