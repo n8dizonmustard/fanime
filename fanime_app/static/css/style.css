@@ -47,6 +47,7 @@ body {
 .title{
   font-size:375%;
   word-wrap: break-word;
+  padding: 12px;
 
 }
   #library-h1{
@@ -101,12 +102,12 @@ h1{
   word-wrap: break-word;
 }
 
-.login{
+.login-page{
   position: relative;
   left: 15px;
   max-width: 95%;
 }
 
-#login-title{
+#login-page-title{
   color: #c40301;
 }
