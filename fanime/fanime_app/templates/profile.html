@@ -11,7 +11,7 @@
         <blockquote>
             <h1 class="title">{{profile.name}}'s Profile </h1>
         </blockquote>
-  
+
     </div>
 
     {% for photo in profile.photo_set.all %}
@@ -41,12 +41,16 @@
         <blockquote>
             <h1 class="title"> FAVORITES </h1>
         </blockquote>
-  
+
     </div>
-    
+
     {% for anime in user.profile.favs.all %}
     <ul>
-        <li><a class="cat"href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a href="{% url 'delete_favorite' anime.api_id %}">X</a></li>
+        <li><a class="cat" href="{% url 'detail' anime.api_id anime.api_name %}">{{ anime.api_name }}</a> <a
+                href="{% url 'delete_favorite' anime.api_id %}">
+                <span><i id="fav-delete" class="material-icons top 20px red-text">delete</i></span>
+                <!-- <i class="material-icons top 20px red-text">delete</i> -->
+            </a></li>
     </ul>
     {% endfor %}
 </div>
