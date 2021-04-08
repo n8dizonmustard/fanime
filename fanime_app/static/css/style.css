@@ -45,7 +45,7 @@ body {
 
   }
 .title{
-  font-size:350%;
+  font-size:325%;
 }
   #library-h1{
     font-family: 'Alfa Slab One', cursive;
@@ -100,7 +100,7 @@ h1{
 }
 
 .login{
-  position: relative;
+ 
   left: 15px;
   max-width: 95%;
 }
