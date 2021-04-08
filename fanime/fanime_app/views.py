@@ -23,7 +23,6 @@ def home(request):
                                                                           #from the api and the page number
 
 def detail(request, api_anime_id, api_anime_name):
-  print(api_anime_id) #api_anime_id is the id im getting from the api not our models
   comment_form = CommentForm() 
   new_anime = Anime(api_anime_id, api_anime_id, api_anime_name)
   new_anime.save()
@@ -41,8 +40,6 @@ def categories(request,category):
 #when a user hits next on category page than add 10 to page make new request to api and render new view
 def categories_next(request,category, page):
   page = page + 10
-  print(page)
-  print(category)
   response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'categories/next.html', {'response':response, 'category':category,'page':page})
 
@@ -53,7 +50,6 @@ def categories_previous(request,category, page):
 
 def categories_first(request,category):
   page = 0
-  print(category)
   response = requests.get(f'https://kitsu.io/api/edge/anime?filter%5Bcategories%5D={category}&page%5Blimit%5D=9&page%5Boffset%5D={page}').json() ##category will be diff depending on button
   return render(request, 'category.html', {'response': response, 'category':category, 'page':page})
 
@@ -95,13 +91,12 @@ def library(request):
   
 def next(request, page):
   page = page + 5 # if a user hit the next button then whatever page is currently at +5 to get the new response
-  print(page) # this will help you if you wanna see it in terminal. Helped me
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'next.html', {'response':response, 'page': page})
 
 def previous(request, page):
   page = page - 5 #same as next but backward
-  print(page)
+  
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
   return render(request, 'previous.html', {'response':response, 'page': page})
 
@@ -181,11 +176,16 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def add_favorite(request, api_anime_id, api_anime_name):
-  print(api_anime_id, api_anime_name)
   profile = Profile.objects.filter(user=request.user)
   anime = Anime.objects.get(id=api_anime_id)
   profile[0].favs.add(anime)
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id})
+
+def delete_favorite(request, anime_api_id):
+  profile = Profile.objects.filter(user=request.user)
+  anime = Anime.objects.get(id = anime_api_id)
+  profile[0].favs.remove(anime)
+  return render(request, 'profile.html' ,{'profile': profile})
 
 
