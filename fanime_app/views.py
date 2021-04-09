@@ -13,7 +13,7 @@ import boto3
 
 S3_BASE_URL = 'https://s3.us-west-2.amazonaws.com/'
 BUCKET = 'simanutui'
-# Create your views here.
+
 
 def home(request):
   page = '0'
@@ -66,7 +66,6 @@ def search(request):
 #working now justin
 @login_required
 def add_comment(request, api_anime_id):
-  print('ADD COMMENT FIRING!!! PEW PEW')
   comments = Comment.objects.filter(anime_id = api_anime_id)
   comment_form = CommentForm()
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
@@ -79,12 +78,9 @@ def add_comment(request, api_anime_id):
   return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form, 'comments':comments})
 
 
-#this is cool. random animes when you dont know what to watch
-#should we make this login users only?
 def random(request):
-  api_anime_id = r.randint(0,4292)
+  api_anime_id = r.randint(0,11000)
   comment_form = CommentForm() 
-  print(api_anime_id)
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
   while response == {
   "errors": [
@@ -97,7 +93,6 @@ def random(request):
   ]
 }:
     api_anime_id = r.randint(0,4292)
-    print('fixing stuffffff')
     response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
   api_anime_img = response['data']['attributes']['posterImage']['small']
   api_anime_name = response['data']['attributes']['canonicalTitle']
@@ -106,7 +101,6 @@ def random(request):
   return render(request,'detail.html', {'response':response,'api_anime_id':api_anime_id, 'api_anime_name': api_anime_name, 'comment_form':comment_form})
 
 #Showing most popular animes according to kitsu
-#I think we should change our layout and put this on homepage?
 def library(request):
   page = 0
   response = requests.get(f'https://kitsu.io/api/edge/anime?page%5Blimit%5D=9&page%5Boffset%5D={page}').json()
@@ -162,8 +156,7 @@ def profile(request):
     profile = Profile.objects.filter(user=request.user)
     return render(request, 'profile.html', {'profile': profile})
 
-#if the user is logged in a edit profile form is visible. Its working but with minor problems -_- 
-# you can keep clicking edit profile and it just makes a new profile every time instead of editing what you already have
+#if the user is logged in a edit profile form is visible. 
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = ['name', 'favorite_anime_ever', 'about' ]
@@ -200,10 +193,12 @@ def signup(request):
 
 def add_favorite(request, api_anime_id, api_anime_name):
   profile = Profile.objects.filter(user=request.user)
+  comments = Comment.objects.filter(anime_id = api_anime_id)
+  comment_form = CommentForm()
   anime = Anime.objects.get(id=api_anime_id)
   profile[0].favs.add(anime)
   response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json() #making new request to api with anime id
-  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id})
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form, 'comments':comments})
 
 def delete_favorite(request, anime_api_id):
   profile = Profile.objects.filter(user=request.user)
@@ -211,4 +206,12 @@ def delete_favorite(request, anime_api_id):
   profile[0].favs.remove(anime)
   return render(request, 'profile.html' ,{'profile': profile})
 
+def delete_comment(request, api_anime_id, comment_id):
+  anime = Anime.objects.get(id=api_anime_id)
+  comment = Comment.objects.get(id = comment_id)
+  comments = Comment.objects.filter(anime_id = api_anime_id)
+  response = requests.get(f'https://kitsu.io/api/edge/anime/{api_anime_id}').json()
+  comment.delete()
+  comment_form = CommentForm() 
+  return render(request, 'detail.html', {'response': response, 'api_anime_id':api_anime_id, 'comment_form':comment_form, 'comments':comments})
 
