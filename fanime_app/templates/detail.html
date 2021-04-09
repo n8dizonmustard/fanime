@@ -49,8 +49,12 @@
     <h4 style="text-align:center; color:red;">Comments</h4>
     <ul class="collection ">
     {% for comment in comments %}
-      <li class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
-    {% endfor %}
+    {%if comment.user == request.user%}
+      <li class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}<a style="color:red;" href="{% url 'delete_comment' api_anime_id comment.id %}"> x </a></li>
+    {%else%}
+    <li class="collection-item #e0e0e0 grey lighten-2"><b>{{comment.user}}</b> - {{comment.comment}}</li>
+      {%endif%}
+      {% endfor %}
   </ul>
     {%else%}
       <h4 style="text-align:center; color:white; font-size:150%;"> NO COMMENTS </h4>

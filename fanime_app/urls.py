@@ -17,6 +17,7 @@ urlpatterns = [
     path('last/', views.last, name ='last'),
     path('detail/<int:api_anime_id>/<str:api_anime_name>/', views.detail, name='detail'),
     path('detail/<int:api_anime_id>', views.add_comment, name ='add_comment'),
+    path('detail/<int:api_anime_id>/delete/<int:comment_id>/', views.delete_comment, name="delete_comment"),
     path('detail/<int:api_anime_id>/favorite/<str:api_anime_name>/', views.add_favorite, name='add_favorite'),
     path('profile/', views.profile, name='profile'),
     path('profile/create/', views.ProfileCreate.as_view(), name="profile_create"),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('profile/<int:anime_api_id>/delete_favorite', views.delete_favorite, name='delete_favorite'),
     path('accounts/signup/', views.signup, name='signup'),
     path('forum/', views.forum, name='forum'),
+    
 ]
